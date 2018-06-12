@@ -15,7 +15,7 @@ RUN	yum -y install curl \
 	&& yum clean all \
 	&& yum makecache \
 	
-RUN yum install -y gcc gcc-c++ make openssl-devel pcre-devel perl zip unzip \
+RUN yum install -y gcc gcc-c++ make  perl zip unzip openssl-devel pcre-devel\
 	&& mkdir -p $BUILD_ROOT \
 	&& cd $BUILD_ROOT \
 	&& curl https://ftp.pcre.org/pub/pcre/pcre-$PCRE_VERSION.zip -o $BUILD_ROOT/pcre-$PCRE_VERSION.zip \
