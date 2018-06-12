@@ -17,11 +17,11 @@ RUN	yum -y install curl \
 	
 RUN yum install -y gcc gcc-c++ make  perl zip unzip openssl-devel pcre-devel
 RUN mkdir -p $BUILD_ROOT \
-	&& cd $BUILD_ROOT \
-	&& curl https://ftp.pcre.org/pub/pcre/pcre-$PCRE_VERSION.zip -o $BUILD_ROOT/pcre-$PCRE_VERSION.zip \
-	&& curl https://www.openssl.org/source/openssl-$OPENSSL_VERSION.tar.gz -o $BUILD_ROOT/openssl-$OPENSSL_VERSION.tar.gz \
-	&& curl http://www.zlib.net/zlib-$ZLIB_VERSION.tar.gz -o $BUILD_ROOT/zlib-$ZLIB_VERSION.tar.gz \
-	&& curl https://nginx.org/download/nginx-$NGINX_VERSION.tar.gz -o $BUILD_ROOT/nginx-$NGINX_VERSION.tar.gz 
+	&& curl -o $BUILD_ROOT/pcre-$PCRE_VERSION.zip https://ftp.pcre.org/pub/pcre/pcre-$PCRE_VERSION.zip  \
+	&& curl -o $BUILD_ROOT/openssl-$OPENSSL_VERSION.tar.gz https://www.openssl.org/source/openssl-$OPENSSL_VERSION.tar.gz  \
+	&& curl -o $BUILD_ROOT/zlib-$ZLIB_VERSION.tar.gz http://www.zlib.net/zlib-$ZLIB_VERSION.tar.gz  \
+	&& curl -o $BUILD_ROOT/nginx-$NGINX_VERSION.tar.gz https://nginx.org/download/nginx-$NGINX_VERSION.tar.gz \
+	&& ls
 RUN cd $BUILD_ROOT \
 	&& ls \
 	&& tar vxzf nginx-$NGINX_VERSION.tar.gz \
