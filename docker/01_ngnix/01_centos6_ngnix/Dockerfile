@@ -14,7 +14,8 @@ RUN	yum -y install curl \
 	#&& curl -o /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-6.repo \
 	&& yum clean all \
 	&& yum makecache \
-	&& yum install -y gcc gcc-c++ make openssl-devel pcre-devel perl zip unzip \
+	
+RUN yum install -y gcc gcc-c++ make openssl-devel pcre-devel perl zip unzip \
 	&& mkdir -p $BUILD_ROOT \
 	&& cd $BUILD_ROOT \
 	&& curl https://ftp.pcre.org/pub/pcre/pcre-$PCRE_VERSION.zip -o $BUILD_ROOT/pcre-$PCRE_VERSION.zip \
@@ -27,7 +28,7 @@ RUN	yum -y install curl \
 	&& tar vxfz openssl-$OPENSSL_VERSION.tar.gz \
 	&& cd nginx-$NGINX_VERSION \
 	&& BUILD_CONFIG="\
-		--prefix=/etc/nginx \
+		--prefix=/usr/local/nginx \
 		--sbin-path=/usr/sbin/nginx \
 		--conf-path=/etc/nginx/nginx.conf \
 		--error-log-path=/var/log/nginx/error.log \
@@ -53,5 +54,6 @@ RUN	yum -y install curl \
 	&& yum -y remove gcc gcc-c++ make perl zip unzip \
 	&& yum clean all
 	
+WORKDIR /usr/local/nginx
 EXPOSE 80 443
 CMD ["nginx", "-g", "daemon off;"]
