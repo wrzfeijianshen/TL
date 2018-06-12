@@ -21,11 +21,14 @@ RUN mkdir -p $BUILD_ROOT \
 	&& curl https://ftp.pcre.org/pub/pcre/pcre-$PCRE_VERSION.zip -o $BUILD_ROOT/pcre-$PCRE_VERSION.zip \
 	&& curl https://www.openssl.org/source/openssl-$OPENSSL_VERSION.tar.gz -o $BUILD_ROOT/openssl-$OPENSSL_VERSION.tar.gz \
 	&& curl http://www.zlib.net/zlib-$ZLIB_VERSION.tar.gz -o $BUILD_ROOT/zlib-$ZLIB_VERSION.tar.gz \
-	&& curl https://nginx.org/download/nginx-$NGINX_VERSION.tar.gz -o $BUILD_ROOT/nginx-$NGINX_VERSION.tar.gz \
+	&& curl https://nginx.org/download/nginx-$NGINX_VERSION.tar.gz -o $BUILD_ROOT/nginx-$NGINX_VERSION.tar.gz 
+RUN cd $BUILD_ROOT \
+	&& ls \
 	&& tar vxzf nginx-$NGINX_VERSION.tar.gz \
 	&& unzip pcre-$PCRE_VERSION.zip \
 	&& tar vxfz zlib-$ZLIB_VERSION.tar.gz \
-	&& tar vxfz openssl-$OPENSSL_VERSION.tar.gz \
+	&& tar vxfz openssl-$OPENSSL_VERSION.tar.gz
+RUN cd $BUILD_ROOT \
 	&& cd nginx-$NGINX_VERSION \
 	&& BUILD_CONFIG="\
 		--prefix=/usr/local/nginx \
