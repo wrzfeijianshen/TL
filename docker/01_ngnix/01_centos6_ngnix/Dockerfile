@@ -13,10 +13,10 @@ RUN	yum -y install curl \
 	&& curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-6.repo \ 
 	#&& curl -o /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-6.repo \
 	&& yum clean all \
-	&& yum makecache \
+	&& yum makecache
 	
-RUN yum install -y gcc gcc-c++ make  perl zip unzip openssl-devel pcre-devel\
-	&& mkdir -p $BUILD_ROOT \
+RUN yum install -y gcc gcc-c++ make  perl zip unzip openssl-devel pcre-devel
+RUN mkdir -p $BUILD_ROOT \
 	&& cd $BUILD_ROOT \
 	&& curl https://ftp.pcre.org/pub/pcre/pcre-$PCRE_VERSION.zip -o $BUILD_ROOT/pcre-$PCRE_VERSION.zip \
 	&& curl https://www.openssl.org/source/openssl-$OPENSSL_VERSION.tar.gz -o $BUILD_ROOT/openssl-$OPENSSL_VERSION.tar.gz \
