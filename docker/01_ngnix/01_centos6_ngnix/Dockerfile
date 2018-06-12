@@ -9,9 +9,9 @@ ENV BUILD_ROOT /usr/local/src/nginx
 
 RUN	yum -y install curl \
 	&& mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup \
-	&& mv /etc/yum.repos.d/epel.repo /etc/yum.repos.d/epel.repo.backup \
+	#&& mv /etc/yum.repos.d/epel.repo /etc/yum.repos.d/epel.repo.backup \
 	&& curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-6.repo \ 
-	&& curl -o /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-6.repo \
+	#&& curl -o /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-6.repo \
 	&& yum clean all \
 	&& yum makecache \
 	&& yum install -y gcc gcc-c++ make openssl-devel pcre-devel perl zip unzip \
