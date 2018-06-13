@@ -9,6 +9,7 @@ FROM centos:6
 MAINTAINER wrzfeijianshen
 
 ENV NGINX_VERSION 1.15.0
+ENV PCRE_VERSION=8.42
 ENV BUILD_ROOT /usr/local/src/
 
 RUN	yum -y install curl \
@@ -25,13 +26,20 @@ RUN useradd -s /sbin/nologin -M www
 
 RUN mkdir -p $BUILD_ROOT \ 
 	&& curl -o $BUILD_ROOT/nginx-$NGINX_VERSION.tar.gz https://nginx.org/download/nginx-$NGINX_VERSION.tar.gz \
+	&& curl -o $BUILD_ROOT/pcre-$PCRE_VERSION.tar.gz https://ftp.pcre.org/pub/pcre/pcre-$PCRE_VERSION.tar.gz\
+	
 RUN cd $BUILD_ROOT \
 	&& tar vxzf nginx-$NGINX_VERSION.tar.gz \
- 
+	&& tar vxzf pcre-$PCRE_VERSION.tar.gz \
+	
 #WORKDIR
 WORKDIR /usr/local/src/nginx-$NGINX_VERSION
-RUN ./configure --prefix=/usr/local/nginx --user=www --group=www --with-http_ssl_module --with-http_stub_status_module --with-pcre=/usr/local/src/pcre-8.42 && m
-ake && make install
+RUN ./configure --prefix=/usr/local/nginx \
+	--user=www --group=www \
+	--with-http_ssl_module \
+	--with-http_stub_status_module \
+	--with-pcre=/usr/local/src/pcre-$PCRE_VERSION \
+	&& make && make install
 
 RUN echo "daemon off;" >> /usr/local/nginx/conf/nginx.conf
 
