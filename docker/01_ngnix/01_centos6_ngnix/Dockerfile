@@ -1,11 +1,15 @@
+# This is wrzfeijianshen First Dockerfile
+# Version 1.0
+# Author: wrzfeijianshen wrzfeijianshen@126.com
+
+# Base images 基础镜像
 FROM centos:6
-MAINTAINER wrzfeijianshen@126.com
+
+# MAINTAINER 维护者信息
+MAINTAINER wrzfeijianshen
 
 ENV NGINX_VERSION 1.15.0
-ENV OPENSSL_VERSION 1.0.2k
-ENV PCRE_VERSION 8.40
-ENV ZLIB_VERSION 1.2.11
-ENV BUILD_ROOT /usr/local/src/nginx
+ENV BUILD_ROOT /usr/local/src/
 
 RUN	yum -y install curl \
 	&& mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup \
@@ -15,23 +19,24 @@ RUN	yum -y install curl \
 	&& yum clean all \
 	&& yum makecache
 	
-RUN yum install -y gcc gcc-c++ wget make  perl openssl-devel pcre-devel zlib zlib-devel
+RUN yum install -y wget gcc gcc-c++ make openssl-devel
+
+RUN useradd -s /sbin/nologin -M www
 
 RUN mkdir -p $BUILD_ROOT \ 
 	&& curl -o $BUILD_ROOT/nginx-$NGINX_VERSION.tar.gz https://nginx.org/download/nginx-$NGINX_VERSION.tar.gz \
-	&& ls
 RUN cd $BUILD_ROOT \
-	&& ls \
 	&& tar vxzf nginx-$NGINX_VERSION.tar.gz \
-	&& cd nginx-$NGINX_VERSION \
-	&& BUILD_CONFIG=" \
-	&& ./configure --prefix=/usr/local/nginx \
-	&& make  \
-	&& make install
-RUN yum -y remove gcc gcc-c++ make perl\
-	&& yum clean all
-	
-	
-WORKDIR /usr/local/nginx
-EXPOSE 80 443
-CMD ["nginx", "-g", "daemon off;"]
+ 
+#WORKDIR
+WORKDIR /usr/local/src/nginx-$NGINX_VERSION
+RUN ./configure --prefix=/usr/local/nginx --user=www --group=www --with-http_ssl
+_module --with-http_stub_status_module --with-pcre=/usr/local/src/pcre-8.42 && m
+ake && make install
+
+RUN echo "daemon off;" >> /usr/local/nginx/conf/nginx.conf
+
+ENV PATH /usr/local/nginx/sbin:$PATH
+EXPOSE 80
+
+CMD ["nginx"]
