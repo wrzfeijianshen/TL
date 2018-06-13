@@ -30,8 +30,7 @@ RUN cd $BUILD_ROOT \
  
 #WORKDIR
 WORKDIR /usr/local/src/nginx-$NGINX_VERSION
-RUN ./configure --prefix=/usr/local/nginx --user=www --group=www --with-http_ssl
-_module --with-http_stub_status_module --with-pcre=/usr/local/src/pcre-8.42 && m
+RUN ./configure --prefix=/usr/local/nginx --user=www --group=www --with-http_ssl_module --with-http_stub_status_module --with-pcre=/usr/local/src/pcre-8.42 && m
 ake && make install
 
 RUN echo "daemon off;" >> /usr/local/nginx/conf/nginx.conf
