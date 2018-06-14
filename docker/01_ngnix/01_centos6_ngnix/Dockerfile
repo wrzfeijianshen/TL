@@ -16,15 +16,15 @@ RUN	mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backu
 	
 ADD ./src/Centos-6.repo /etc/yum.repos.d/CentOS-Base.repo
 ADD ./src/epel-6.repo /etc/yum.repos.d/epel.repo
-ADD ./src/nginx-$NGINX_VERSION.tar.gz /usr/local/src \
-ADD ./src/pcre-$PCRE_VERSION.zip /usr/local/src \
+ADD ./src/nginx-$NGINX_VERSION.tar.gz /usr/local/src
+ADD ./src/pcre-$PCRE_VERSION.zip /usr/local/src
 
 RUN yum clean all &&  yum makecache
 RUN yum install -y wget gcc gcc-c++ make openssl-devel
 
 RUN useradd -s /sbin/nologin -M www
 
-RUN mkdir -p $BUILD_ROOT \ 
+RUN mkdir -p $BUILD_ROOT
 
 
 	
