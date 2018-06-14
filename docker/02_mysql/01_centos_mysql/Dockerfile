@@ -23,8 +23,6 @@ RUN /etc/init.d/mysqld start \
     && mysql -e "grant all privileges on *.* to 'root'@'localhost' identified by '123456' WITH GRANT OPTION ;"\ 
     && mysql -u root -p123456 -e "show databases;"  
 
-RUN echo "daemon off;" >> /usr/local/nginx/conf/nginx.conf
-
 ENV PATH /usr/bin/:$PATH
 
 # 镜像暴露3306端口；
