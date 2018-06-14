@@ -14,9 +14,8 @@ ENV BUILD_ROOT /usr/local/src/
 
 RUN	yum -y install curl \
 	&& mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup \
-	#&& mv /etc/yum.repos.d/epel.repo /etc/yum.repos.d/epel.repo.backup \
-	&& curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-6.repo \ 
-	&& curl -o /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-6.repo \
+	&& mv ./src/Centos-6.repo /etc/yum.repos.d/CentOS-Base.repo \
+	&& mv ./src/epel-6.repo /etc/yum.repos.d/epel.repo \
 	&& yum clean all \
 	&& yum makecache
 	
@@ -25,15 +24,12 @@ RUN yum install -y wget gcc gcc-c++ make openssl-devel
 RUN useradd -s /sbin/nologin -M www
 
 RUN mkdir -p $BUILD_ROOT \ 
-	&& curl -o $BUILD_ROOT/nginx-$NGINX_VERSION.tar.gz https://nginx.org/download/nginx-$NGINX_VERSION.tar.gz \
-	&& curl -o $BUILD_ROOT/pcre-$PCRE_VERSION.tar.gz https://ftp.pcre.org/pub/pcre/pcre-$PCRE_VERSION.tar.gz\
-	
-RUN cd $BUILD_ROOT \
-	&& tar vxzf nginx-$NGINX_VERSION.tar.gz \
-	&& tar vxzf pcre-$PCRE_VERSION.tar.gz \
+
+ADD ./src/nginx-$NGINX_VERSION.tar.gz /usr/local/src \
+	&& ./src/pcre-$PCRE_VERSION.zip /usr/local/src \
 	
 #WORKDIR
-WORKDIR /usr/local/src/nginx-$NGINX_VERSION
+WORKDIR $BUILD_ROOT/nginx-$NGINX_VERSION
 RUN ./configure --prefix=/usr/local/nginx \
 	--user=www --group=www \
 	--with-http_ssl_module \
