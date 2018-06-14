@@ -7,6 +7,7 @@ FROM centos:6
 
 # MAINTAINER 维护者信息
 MAINTAINER wrzfeijianshen
+VOLUME ./src
 
 ENV NGINX_VERSION 1.15.0
 ENV PCRE_VERSION=8.42
