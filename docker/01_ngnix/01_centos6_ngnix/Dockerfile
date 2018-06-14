@@ -12,14 +12,12 @@ ENV NGINX_VERSION 1.15.0
 ENV PCRE_VERSION=8.42
 ENV BUILD_ROOT /usr/local/src/
 
-RUN	yum -y install curl \
-	&& mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup
+RUN	mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup
 	
 ADD ./src/Centos-6.repo /etc/yum.repos.d/CentOS-Base.repo
 ADD ./src/epel-6.repo /etc/yum.repos.d/epel.repo
 
-RUN yum clean all \
-	&& yum makecache
+RUN yum clean all &&  yum makecache
 	
 RUN yum install -y wget gcc gcc-c++ make openssl-devel
 
