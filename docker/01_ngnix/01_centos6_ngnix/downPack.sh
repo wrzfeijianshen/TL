@@ -16,5 +16,4 @@ curl -o $BUILD_ROOT/pcre-$PCRE_VERSION.tar.gz https://ftp.pcre.org/pub/pcre/pcre
 #curl -o $BUILD_ROOT/zlib-$ZLIB_VERSION.tar.gz https://www.zlib.net/zlib-$ZLIB_VERSION.tar.gz
 #wget -O $BUILD_ROOT/zlib-$ZLIB_VERSION.tar.gz https://www.zlib.net/zlib-$ZLIB_VERSION.tar.gz
 
-
 #curl -o $BUILD_ROOT/pcre-$PCRE_VERSION.zip https://ftp.pcre.org/pub/pcre/pcre-$PCRE_VERSION.zip
