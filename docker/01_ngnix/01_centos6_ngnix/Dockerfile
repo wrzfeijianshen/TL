@@ -36,6 +36,7 @@ RUN ./configure --prefix=/usr/local/nginx \
 	--with-http_stub_status_module \
 	--with-pcre=/usr/local/src/pcre-$PCRE_VERSION \
 	&& make && make install
+RUN yum clean all
 
 RUN echo "daemon off;" >> /usr/local/nginx/conf/nginx.conf
 
