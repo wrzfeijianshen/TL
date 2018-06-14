@@ -17,7 +17,7 @@ RUN	mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backu
 ADD Centos-6.repo /etc/yum.repos.d/CentOS-Base.repo
 ADD epel-6.repo /etc/yum.repos.d/epel.repo
 ADD nginx-$NGINX_VERSION.tar.gz /usr/local/src
-ADD pcre-$PCRE_VERSION.zip /usr/local/src
+ADD pcre-$PCRE_VERSION.tar.gz /usr/local/src
 
 RUN yum clean all &&  yum makecache
 RUN yum install -y wget gcc gcc-c++ make openssl-devel
