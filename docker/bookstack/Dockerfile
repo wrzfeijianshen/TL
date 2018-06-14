@@ -14,6 +14,6 @@ RUN cp /etc/apt/sources.list /etc/apt/sources.list.bak \
 RUN apt-get -y install wget 
 RUN mkdir -p $BUILD_ROOT \
     && cd $BUILD_ROOT \
-	&& wget -O install.sh http://download.bt.cn/install/install-ubuntu.sh && sudo bash install.sh
+	&& wget -O install.sh http://download.bt.cn/install/install-ubuntu.sh && bash install.sh
 # 镜像暴露8888端口；
 EXPOSE 8888
