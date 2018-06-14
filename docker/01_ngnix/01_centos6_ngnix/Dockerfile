@@ -7,7 +7,6 @@ FROM centos:6
 
 # MAINTAINER 维护者信息
 MAINTAINER wrzfeijianshen
-VOLUME ./src
 
 ENV NGINX_VERSION 1.15.0
 ENV PCRE_VERSION=8.42
@@ -15,10 +14,10 @@ ENV BUILD_ROOT /usr/local/src/
 
 RUN	mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup
 	
-ADD ./src/Centos-6.repo /etc/yum.repos.d/CentOS-Base.repo
-ADD ./src/epel-6.repo /etc/yum.repos.d/epel.repo
-ADD ./src/nginx-$NGINX_VERSION.tar.gz /usr/local/src
-ADD ./src/pcre-$PCRE_VERSION.zip /usr/local/src
+ADD Centos-6.repo /etc/yum.repos.d/CentOS-Base.repo
+ADD epel-6.repo /etc/yum.repos.d/epel.repo
+ADD nginx-$NGINX_VERSION.tar.gz /usr/local/src
+ADD pcre-$PCRE_VERSION.zip /usr/local/src
 
 RUN yum clean all &&  yum makecache
 RUN yum install -y wget gcc gcc-c++ make openssl-devel
