@@ -14,9 +14,10 @@ ENV BUILD_ROOT /usr/local/src/
 
 RUN	yum -y install curl \
 	&& mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup \
-	&& mv ./src/Centos-6.repo /etc/yum.repos.d/CentOS-Base.repo \
-	&& mv ./src/epel-6.repo /etc/yum.repos.d/epel.repo \
-	&& yum clean all \
+ADD ./src/Centos-6.repo /etc/yum.repos.d/CentOS-Base.repo
+ADD ./src/epel-6.repo /etc/yum.repos.d/epel.repo
+
+RUN yum clean all \
 	&& yum makecache
 	
 RUN yum install -y wget gcc gcc-c++ make openssl-devel
