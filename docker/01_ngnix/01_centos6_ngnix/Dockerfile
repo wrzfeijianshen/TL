@@ -13,7 +13,8 @@ ENV PCRE_VERSION=8.42
 ENV BUILD_ROOT /usr/local/src/
 
 RUN	yum -y install curl \
-	&& mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup \
+	&& mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup
+	
 ADD ./src/Centos-6.repo /etc/yum.repos.d/CentOS-Base.repo
 ADD ./src/epel-6.repo /etc/yum.repos.d/epel.repo
 
