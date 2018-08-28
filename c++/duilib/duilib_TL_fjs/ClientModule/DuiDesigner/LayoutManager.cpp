@@ -1849,6 +1849,15 @@ void CLayoutManager::SaveControlProperty(CControlUI* pControl, TiXmlElement* pNo
 		pNode->SetAttribute("tab", "true");
 	}
 
+	if (pControl->IsEnabled() == false)
+	{
+		pNode->SetAttribute("enabled", "false");
+	}
+	else
+	{
+		pNode->SetAttribute("enabled", "true");
+	}
+
 	if (pControl->IsContextMenuUsed())
 	{
 		pNode->SetAttribute("menu", "true");
@@ -2783,7 +2792,6 @@ bool CLayoutManager::SaveSkinFile(LPCTSTR pstrPathName)
 			cachedFonts.push_back(lf);
 
 			TiXmlElement* pFontElem = new TiXmlElement("Font");
-
 			_stprintf_s(szBuf, _T("%d"), index);
 			pFontElem->SetAttribute("id", StringConvertor::WideToUtf8(szBuf));
 
