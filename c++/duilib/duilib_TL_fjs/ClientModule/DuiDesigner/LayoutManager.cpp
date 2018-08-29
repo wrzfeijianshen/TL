@@ -1699,6 +1699,16 @@ void CLayoutManager::SaveControlProperty(CControlUI* pControl, TiXmlElement* pNo
 			);
 		pNode->SetAttribute("pos", StringConvertor::WideToUtf8(szBuf));
 
+		if (pControl->IsEnabled() == false)
+		{
+			pNode->SetAttribute("enabled", "false");
+		}
+		else
+		{
+			pNode->SetAttribute("enabled", "true");
+
+		}
+
 		int fixed_w = pControl->GetFixedWidth();
 		int fixed_h = pControl->GetFixedHeight();
 		if (fixed_w > 0)
@@ -1721,6 +1731,16 @@ void CLayoutManager::SaveControlProperty(CControlUI* pControl, TiXmlElement* pNo
 		{
 			CVerticalLayoutUI* pParentVLaout = static_cast<CVerticalLayoutUI*>(pParent->GetInterface(DUI_CTR_VERTICALLAYOUT));
 			CHorizontalLayoutUI* pParentHLaout = static_cast<CHorizontalLayoutUI*>(pParent->GetInterface(DUI_CTR_HORIZONTALLAYOUT));
+		
+			if (pControl->IsEnabled() == false)
+			{
+				pNode->SetAttribute("enabled", "false");
+			}
+			else
+			{
+				pNode->SetAttribute("enabled", "true");
+
+			}
 
 			int fixed_w = pControl->GetFixedWidth();
 			int fixed_h = pControl->GetFixedHeight();
@@ -1847,15 +1867,6 @@ void CLayoutManager::SaveControlProperty(CControlUI* pControl, TiXmlElement* pNo
 	if (pControl->IsTabEnable() == true)
 	{
 		pNode->SetAttribute("tab", "true");
-	}
-
-	if (pControl->IsEnabled() == false)
-	{
-		pNode->SetAttribute("enabled", "false");
-	}
-	else
-	{
-		pNode->SetAttribute("enabled", "true");
 	}
 
 	if (pControl->IsContextMenuUsed())
