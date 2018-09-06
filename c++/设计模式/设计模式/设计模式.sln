@@ -1,0 +1,27 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "观察者模式", "观察者模式", "{827B08DF-DB21-44E1-ABB0-9B616142C5F5}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "案例1", "观察者模式\案例1\案例1.vcxproj", "{361E9753-929F-48FD-92BD-4777E7B1F156}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{361E9753-929F-48FD-92BD-4777E7B1F156}.Debug|Win32.ActiveCfg = Debug|Win32
+		{361E9753-929F-48FD-92BD-4777E7B1F156}.Debug|Win32.Build.0 = Debug|Win32
+		{361E9753-929F-48FD-92BD-4777E7B1F156}.Release|Win32.ActiveCfg = Release|Win32
+		{361E9753-929F-48FD-92BD-4777E7B1F156}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{361E9753-929F-48FD-92BD-4777E7B1F156} = {827B08DF-DB21-44E1-ABB0-9B616142C5F5}
+	EndGlobalSection
+EndGlobal
