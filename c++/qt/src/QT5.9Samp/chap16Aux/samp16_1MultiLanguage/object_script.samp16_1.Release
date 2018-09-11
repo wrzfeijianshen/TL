@@ -1,0 +1,12 @@
+INPUT(
+./release\main.o
+./release\mainwindow.o
+./release\qwdialogsize.o
+./release\qwdialogheaders.o
+./release\qwdialoglocate.o
+./release\qrc_res.o
+./release\moc_mainwindow.o
+./release\moc_qwdialogsize.o
+./release\moc_qwdialogheaders.o
+./release\moc_qwdialoglocate.o
+);

@@ -1,0 +1,14 @@
+INPUT(
+./release\main.o
+./release\qwmainwindow.o
+./release\qformtable.o
+./release\qformdoc.o
+./release\qwdialogheaders.o
+./release\qwdialogsize.o
+./release\qrc_res.o
+./release\moc_qwmainwindow.o
+./release\moc_qformtable.o
+./release\moc_qformdoc.o
+./release\moc_qwdialogheaders.o
+./release\moc_qwdialogsize.o
+);

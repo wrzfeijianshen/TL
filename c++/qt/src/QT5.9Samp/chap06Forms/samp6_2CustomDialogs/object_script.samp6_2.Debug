@@ -1,0 +1,12 @@
+INPUT(
+./debug\main.o
+./debug\mainwindow.o
+./debug\qwdialogsize.o
+./debug\qwdialogheaders.o
+./debug\qwdialoglocate.o
+./debug\qrc_res.o
+./debug\moc_mainwindow.o
+./debug\moc_qwdialogsize.o
+./debug\moc_qwdialogheaders.o
+./debug\moc_qwdialoglocate.o
+);

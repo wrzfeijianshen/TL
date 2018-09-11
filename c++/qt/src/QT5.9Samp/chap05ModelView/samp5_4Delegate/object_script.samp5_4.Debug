@@ -1,0 +1,12 @@
+INPUT(
+./debug\main.o
+./debug\mainwindow.o
+./debug\qwintspindelegate.o
+./debug\qwfloatspindelegate.o
+./debug\qwcomboboxdelegate.o
+./debug\qrc_res.o
+./debug\moc_mainwindow.o
+./debug\moc_qwintspindelegate.o
+./debug\moc_qwfloatspindelegate.o
+./debug\moc_qwcomboboxdelegate.o
+);

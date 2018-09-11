@@ -1,0 +1,12 @@
+INPUT(
+./release\main.o
+./release\mainwindow.o
+./release\qwintspindelegate.o
+./release\qwfloatspindelegate.o
+./release\qwcomboboxdelegate.o
+./release\qrc_res.o
+./release\moc_mainwindow.o
+./release\moc_qwintspindelegate.o
+./release\moc_qwfloatspindelegate.o
+./release\moc_qwcomboboxdelegate.o
+);
