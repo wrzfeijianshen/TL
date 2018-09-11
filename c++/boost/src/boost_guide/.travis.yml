@@ -1,0 +1,36 @@
+sudo: required
+dist: trusty
+
+os: linux
+
+notifications:
+  email: false
+
+language: cpp
+
+compiler:
+  - gcc
+  - clang
+
+cache: ccache
+
+env:
+  global:
+    - BOOST_VERSION=1_64_0
+
+#before_install:
+
+install:
+  - wget -O boost_${BOOST_VERSION}.tar.gz https://dl.bintray.com/boostorg/release/1.64.0/source/boost_${BOOST_VERSION}.tar.gz && tar -xzf boost_${BOOST_VERSION}.tar.gz
+  # for filesystem
+  - sudo mkdir /home/chrono
+
+script:
+  - cd boost_${BOOST_VERSION}
+  - ./bootstrap.sh --without-libraries=graph,locale,regex,serialization,wave,mpi > build.log 2>&1 || (cat build.log && exit 1)
+  - sudo ./b2 link=static -j2 install > build.log 2>&1 || (cat build.log && exit 1)
+  - cd ./tools/build
+  - ./bootstrap.sh
+  - sudo ./b2 install > build.log 2>&1 || (cat build.log && exit 1)
+  - cd ../../..
+  - ./go
