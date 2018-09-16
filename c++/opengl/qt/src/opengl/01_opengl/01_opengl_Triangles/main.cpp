@@ -1,6 +1,7 @@
 #include <windows.h>// undefined reference to `glutInit'
 #include <iostream>
 #include <GL/freeglut.h>
+
 #include "vgl.h"
 #include "LoadShaders.h"
 

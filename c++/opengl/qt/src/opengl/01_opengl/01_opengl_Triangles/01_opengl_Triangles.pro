@@ -11,9 +11,10 @@ SOURCES += \
 
 #INCLUDEPATH += $$PWD/../../glut
 #DEPENDPATH += $$PWD/../../glut
-win32: LIBS += -L$$PWD/../../freeglut/lib -lfreeglut
-DEPENDPATH += $$PWD/../../freeglut/bin
+win32: LIBS += -L$$PWD/../../Third_Party/freeglut_MinGW_3.0.0_1/freeglut/lib -lfreeglut
+DEPENDPATH += $$PWD/../../Third_Party/freeglut_MinGW_3.0.0_1/freeglut/bin
 
-INCLUDEPATH += $$PWD/../../freeglut/include
-INCLUDEPATH += $$PWD/../../examples/include
-INCLUDEPATH += $$PWD/../../examples/lib/glfw/include
+INCLUDEPATH += $$PWD/../../Third_Party/freeglut_MinGW_3.0.0_1/freeglut/include
+
+INCLUDEPATH += $$PWD/../../src/examples/include
+INCLUDEPATH += $$PWD/../../src/examples/lib/glfw/include

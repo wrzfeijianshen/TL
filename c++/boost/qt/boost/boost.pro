@@ -6,4 +6,5 @@ INCLUDEPATH+= $$PWD/../boost_1_68_0/include/boost-1_68/
 LIBS += -L$$PWD/../boost_1_68_0/lib
 
 SUBDIRS += \
-    01_time
+    01_time \
+    02_ptr
