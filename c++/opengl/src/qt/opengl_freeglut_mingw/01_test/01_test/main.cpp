@@ -1,5 +1,6 @@
 #include <windows.h>
 #include <GL/glut.h>
+#include <GL/freeglut_ext.h>
 void init(void)
 {
   glClearColor(1.0, 1.0, 1.0, 0.0);
@@ -23,6 +24,7 @@ int main(int argc, char **argv)
   glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
   glutInitWindowPosition(50, 100);
   glutInitWindowSize(400, 300);
+ glutInitContextVersion(4, 3);
   glutCreateWindow("Example OpenGL Program");
   init();
   glutDisplayFunc(lineSegment);
