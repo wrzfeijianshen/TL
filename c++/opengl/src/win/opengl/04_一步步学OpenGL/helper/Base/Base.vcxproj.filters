@@ -16,10 +16,10 @@
     <Filter Include="math3d">
       <UniqueIdentifier>{5beb3b54-3917-4b0d-93bd-69d0ef631e23}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ogldev_math_3d">
+    <Filter Include="ogldev">
       <UniqueIdentifier>{3f22f8fd-ffc9-4991-8d09-3e477f26756d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ogldev_math_3d\assimp">
+    <Filter Include="ogldev\assimp">
       <UniqueIdentifier>{19a653cb-8957-415f-afe6-18f6dd26246b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -37,12 +37,18 @@
       <Filter>math3d</Filter>
     </ClInclude>
     <ClInclude Include="util\ogldev_math_3d\ogldev_math_3d.h">
-      <Filter>ogldev_math_3d</Filter>
+      <Filter>ogldev</Filter>
+    </ClInclude>
+    <ClInclude Include="util\ogldev\ogldev_util.h">
+      <Filter>ogldev</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="util\math3d\math3d.cpp">
       <Filter>math3d</Filter>
+    </ClCompile>
+    <ClCompile Include="util\ogldev\ogldev_util.cpp">
+      <Filter>ogldev</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

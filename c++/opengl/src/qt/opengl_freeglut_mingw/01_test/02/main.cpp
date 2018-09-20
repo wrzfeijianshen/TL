@@ -1,24 +1,22 @@
-//#include <GL/freeglut.h>
-//#include <GL/glut.h>
-//#include <GL/gl.h>
-#include <Windows.h>
+#include <windows.h>
 
-
-//#include <glad/glad.h>
-
-//#include <GL/glew.h>
 #include <GLFW/glfw3.h>
-#include <iostream>
 
-int main()
+int main(int argc, char *argv[])
 {
-    GLFWwindow* window;
-    /* 初始化glfw库 */
-       if (!glfwInit())
-           return -1;
+    int running = GL_TRUE;
+    //初始化 GLFW
+    if( !glfwInit() )
+    {
+        return 0;
+    }
+
 
 //    glfwInit();
 //    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 //    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 //    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    //glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+
+    return 0;
 }

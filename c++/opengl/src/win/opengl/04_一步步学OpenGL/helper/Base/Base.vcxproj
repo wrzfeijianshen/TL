@@ -16,7 +16,7 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
@@ -69,11 +69,13 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="util\compat.hxx" />
     <ClInclude Include="util\math3d\math3d.h" />
+    <ClInclude Include="util\ogldev\ogldev_util.h" />
     <ClInclude Include="util\ogldev_math_3d\ogldev_math_3d.h" />
     <ClInclude Include="util\util.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="util\math3d\math3d.cpp" />
+    <ClCompile Include="util\ogldev\ogldev_util.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

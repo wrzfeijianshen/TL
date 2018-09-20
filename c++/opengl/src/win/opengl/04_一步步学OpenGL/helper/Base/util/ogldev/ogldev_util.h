@@ -29,7 +29,6 @@
 #include <string.h>
 #include <assert.h>
 #include "ogldev_types.h"
-
 using namespace std;
 
 bool ReadFile(const char* fileName, string& outFile);
