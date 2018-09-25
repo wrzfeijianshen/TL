@@ -1,11 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "观察者模式", "观察者模式", "{827B08DF-DB21-44E1-ABB0-9B616142C5F5}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "案例1", "观察者模式\案例1\案例1.vcxproj", "{361E9753-929F-48FD-92BD-4777E7B1F156}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "单例模式", "单例模式", "{43D60C24-910F-4A3F-B58F-2D8017C9345C}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1_懒汉式", "1_懒汉式\1_懒汉式.vcxproj", "{364A4B54-79D4-4783-8BDA-3949D42AB961}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,11 +21,16 @@ Global
 		{361E9753-929F-48FD-92BD-4777E7B1F156}.Debug|Win32.Build.0 = Debug|Win32
 		{361E9753-929F-48FD-92BD-4777E7B1F156}.Release|Win32.ActiveCfg = Release|Win32
 		{361E9753-929F-48FD-92BD-4777E7B1F156}.Release|Win32.Build.0 = Release|Win32
+		{364A4B54-79D4-4783-8BDA-3949D42AB961}.Debug|Win32.ActiveCfg = Debug|Win32
+		{364A4B54-79D4-4783-8BDA-3949D42AB961}.Debug|Win32.Build.0 = Debug|Win32
+		{364A4B54-79D4-4783-8BDA-3949D42AB961}.Release|Win32.ActiveCfg = Release|Win32
+		{364A4B54-79D4-4783-8BDA-3949D42AB961}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{361E9753-929F-48FD-92BD-4777E7B1F156} = {827B08DF-DB21-44E1-ABB0-9B616142C5F5}
+		{364A4B54-79D4-4783-8BDA-3949D42AB961} = {43D60C24-910F-4A3F-B58F-2D8017C9345C}
 	EndGlobalSection
 EndGlobal
