@@ -22,7 +22,7 @@ int main(int argc, char** argv)
 	//≥ı ºªØ
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH);
-	glutInitWindowSize(800, 600);
+	glutInitWindowSize(300, 300);
 	glutCreateWindow("LJLHelloWord");
 	glutReshapeFunc(changeViewport);
 	glutDisplayFunc(render);

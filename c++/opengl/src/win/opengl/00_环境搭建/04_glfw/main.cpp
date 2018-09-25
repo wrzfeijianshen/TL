@@ -27,7 +27,7 @@ int main(int argc, char** argv[])
 
 	glewExperimental = GL_TRUE;
 
-	GLFWwindow* window = glfwCreateWindow(800, 600, "LearnOpenGL", nullptr, nullptr);
+	GLFWwindow* window = glfwCreateWindow(300, 300, "LearnOpenGL", nullptr, nullptr);
 	if (window == nullptr)
 	{
 		cout << "Failed to create GLFW window" << endl;

@@ -11,9 +11,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{CE25215A-44A6-43F9-9E6C-36BBF2362921}</ProjectGuid>
-    <RootNamespace>My03_glfw</RootNamespace>
-    <ProjectName>03_window三角形</ProjectName>
+    <ProjectGuid>{2BF3BCDF-CEE7-433C-BD76-AC421F8CC45E}</ProjectGuid>
+    <RootNamespace>My02_windows</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -45,17 +44,10 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\helper\Base\util\ogldev\assimp;..\..\Third_Party_Package\glew_2.1.0\include;..\..\Third_Party_Package\freeglut_3.0.0_vs2013\include;D:\workspace\github.com\wrzfeijianshen\TL\c++\opengl\src\win\opengl\04_一步步学OpenGL\helper\Base\util;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_MBCS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>..\..\Third_Party_Package\glew_2.1.0\lib\Release\Win32;..\..\Third_Party_Package\freeglut_3.0.0_vs2013\lib\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
-    <PreBuildEvent>
-      <Command>copy "$(ProjectDir)..\..\Third_Party_Package\freeglut_3.0.0_vs2013\lib\Release\freeglut.dll" "$(OutDir)"</Command>
-    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -73,9 +65,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="GLContext.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
