@@ -7,4 +7,5 @@ LIBS += -L$$PWD/../boost_1_68_0/lib
 
 SUBDIRS += \
     01_time \
-    02_ptr
+    02_ptr \
+    03_tools
