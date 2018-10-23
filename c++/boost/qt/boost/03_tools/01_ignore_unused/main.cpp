@@ -67,15 +67,114 @@ void test4()
     cout << n1 << " : " << n2 << endl;
 }
 
+void output(int i)
+{
+    cout << i << endl;
+}
+
+void test5()
+{
+#if 0
+    for(uint8_t i = 0; i < 4; i++)
+    {
+        thread t(output,i);
+        t.detach();
+    }
+#endif
+#if 0
+    for(int i = 0;i < 4;i++)
+    {
+        thread t( [i]{
+            cout << i << endl;
+        });
+        t.detach();
+    }
+#endif
+}
+
+class Task
+{
+public:
+    void operator()(int i)
+    {
+        cout << i << endl;
+    }
+};
+
+void test6()
+{
+#if 0
+    for(int i = 0;i < 4; i++)
+    {
+        Task task;
+        thread t(task,i);
+        t.detach();
+    }
+#endif
+    // detach方式，启动的线程自主在后台运行，当前的代码继续往下执行，不等待新线程结束
+    // join方式，等待启动的线程完成，才会继续往下执行。假如前面的代码使用这种方式，其输出就会0,1,2,3，因为每次都是前一个线程输出完成了才会进行下一个循环，启动下一个新线程。
+    for(int i = 0;i < 4; i++)
+    {
+        Task task;
+        thread t(task,i);
+        t.join();
+    }
+}
+class _tagNode
+{
+public:
+    int a;
+    int b;
+public:
+    void do_some_work(int a);
+};
+
+void funcTest7(_tagNode &node)
+{
+    node.a = 10;
+    node.b = 20;
+}
+
+void test7()
+{
+//    _tagNode node;
+//    thread t(funcTest7,node);
+//    t.join();
+//    cout << node.a << endl;
+//    cout << node.b << endl;
+}
+void funcTest8(int id,int b,int c)
+{
+    cout << "id ： "<< id << " " << "c" << endl;
+}
+void test8()
+{
+    cout << "test8 start" <<endl;
+
+    int id = 0;
+    int b = 0;
+    int c = 0;
+    thread t(funcTest8,id,b,c);
+    int aa = static_cast<int>(t.get_id());
+    cout << t.get_id() << endl;
+    t.join();
+    cout << "test8 end" <<endl;
+}
+
 int main()
 {
     system("chcp 65001");// 设置编码输出为中文
-//       int x =  test1(3,4);
-//        cout << "test1 : " << x <<endl;
-//        test2();
-//        test3();
-//        cout << "test3 "<<endl;
-//    test4();
+    //       int x =  test1(3,4);
+    //        cout << "test1 : " << x <<endl;
+    //        test2();
+    //        test3();
+    //        cout << "test3 "<<endl;
+    //    test4();
+    //    test5();
+    //    test6();
+//    test7();
+    test8();
 
+    getchar();
     return 0;
 }
