@@ -156,6 +156,13 @@ void test8()
     int c = 0;
     thread t(funcTest8,id,b,c);
     int aa = static_cast<int>(t.get_id());
+    std::thread::id t = t1.get_id();
+
+    std::ostringstream oss;
+        oss << std::this_thread::get_id();
+        std::string stid = oss.str();
+        unsigned long long tid = std::stoull(stid);
+
     cout << t.get_id() << endl;
     t.join();
     cout << "test8 end" <<endl;
