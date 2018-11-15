@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<DirectUIProject Name="demo_xml" Version="2.0.0.1">
+    <Directory Name="03_xml">
+        <File Name="01_xml.xml" />
+    </Directory>
+</DirectUIProject>
