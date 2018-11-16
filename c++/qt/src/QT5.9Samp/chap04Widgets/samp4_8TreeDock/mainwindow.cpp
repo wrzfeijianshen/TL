@@ -264,3 +264,8 @@ void MainWindow::on_actDockFloat_triggered(bool checked)
     ui->dockWidget->setFloating(checked);
 }
 
+
+void MainWindow::on_actDockFloat_triggered()
+{
+
+}

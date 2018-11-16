@@ -56,6 +56,9 @@
        <property name="suffix">
         <string> kg</string>
        </property>
+       <property name="prefix">
+        <string/>
+       </property>
        <property name="maximum">
         <number>1000</number>
        </property>
@@ -74,6 +77,9 @@
        </property>
        <property name="prefix">
         <string>$ </string>
+       </property>
+       <property name="decimals">
+        <number>2</number>
        </property>
        <property name="maximum">
         <double>10000.000000000000000</double>

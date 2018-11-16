@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>934</width>
-    <height>500</height>
+    <width>929</width>
+    <height>657</height>
    </rect>
   </property>
   <property name="font">
@@ -75,7 +75,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>934</width>
+     <width>929</width>
      <height>23</height>
     </rect>
    </property>
@@ -198,7 +198,7 @@
          <string>图片文件</string>
         </property>
         <property name="icon">
-         <iconset>
+         <iconset resource="res.qrc">
           <normaloff>:/images/icons/15.ico</normaloff>:/images/icons/15.ico</iconset>
         </property>
         <item>
@@ -206,7 +206,7 @@
           <string>分组节点</string>
          </property>
          <property name="icon">
-          <iconset>
+          <iconset resource="res.qrc">
            <normaloff>:/images/icons/open3.bmp</normaloff>:/images/icons/open3.bmp</iconset>
          </property>
          <item>
@@ -214,7 +214,7 @@
            <string>图片节点</string>
           </property>
           <property name="icon">
-           <iconset>
+           <iconset resource="res.qrc">
             <normaloff>:/images/icons/31.ico</normaloff>:/images/icons/31.ico</iconset>
           </property>
          </item>
@@ -228,7 +228,7 @@
            <string>图片2</string>
           </property>
           <property name="icon">
-           <iconset>
+           <iconset resource="res.qrc">
             <normaloff>:/images/icons/31.ico</normaloff>:/images/icons/31.ico</iconset>
           </property>
          </item>
@@ -239,9 +239,21 @@
     </layout>
    </widget>
   </widget>
+  <widget class="QDockWidget" name="dockWidget_2">
+   <attribute name="dockWidgetArea">
+    <number>4</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgetContents_2"/>
+  </widget>
+  <widget class="QDockWidget" name="dockWidget_3">
+   <attribute name="dockWidgetArea">
+    <number>2</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgetContents_3"/>
+  </widget>
   <action name="actAddFolder">
    <property name="icon">
-    <iconset>
+    <iconset resource="res.qrc">
      <normaloff>:/images/icons/open3.bmp</normaloff>:/images/icons/open3.bmp</iconset>
    </property>
    <property name="text">
@@ -256,7 +268,7 @@
   </action>
   <action name="actAddFiles">
    <property name="icon">
-    <iconset>
+    <iconset resource="res.qrc">
      <normaloff>:/images/icons/824.bmp</normaloff>:/images/icons/824.bmp</iconset>
    </property>
    <property name="text">
@@ -274,7 +286,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset>
+    <iconset resource="res.qrc">
      <normaloff>:/images/icons/418.bmp</normaloff>:/images/icons/418.bmp</iconset>
    </property>
    <property name="text">
@@ -292,7 +304,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset>
+    <iconset resource="res.qrc">
      <normaloff>:/images/icons/416.bmp</normaloff>:/images/icons/416.bmp</iconset>
    </property>
    <property name="text">
@@ -310,7 +322,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset>
+    <iconset resource="res.qrc">
      <normaloff>:/images/icons/414.bmp</normaloff>:/images/icons/414.bmp</iconset>
    </property>
    <property name="text">
@@ -325,7 +337,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset>
+    <iconset resource="res.qrc">
      <normaloff>:/images/icons/424.bmp</normaloff>:/images/icons/424.bmp</iconset>
    </property>
    <property name="text">
@@ -343,7 +355,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset>
+    <iconset resource="res.qrc">
      <normaloff>:/images/icons/delete1.bmp</normaloff>:/images/icons/delete1.bmp</iconset>
    </property>
    <property name="text">
@@ -355,7 +367,7 @@
   </action>
   <action name="actQuit">
    <property name="icon">
-    <iconset>
+    <iconset resource="res.qrc">
      <normaloff>:/images/icons/exit.bmp</normaloff>:/images/icons/exit.bmp</iconset>
    </property>
    <property name="text">
@@ -370,7 +382,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset>
+    <iconset resource="res.qrc">
      <normaloff>:/images/icons/426.bmp</normaloff>:/images/icons/426.bmp</iconset>
    </property>
    <property name="text">
@@ -382,7 +394,7 @@
   </action>
   <action name="actScanItems">
    <property name="icon">
-    <iconset>
+    <iconset resource="res.qrc">
      <normaloff>:/images/icons/fold.bmp</normaloff>:/images/icons/fold.bmp</iconset>
    </property>
    <property name="text">
@@ -400,7 +412,7 @@
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset>
+    <iconset resource="res.qrc">
      <normaloff>:/images/icons/414.bmp</normaloff>:/images/icons/414.bmp</iconset>
    </property>
    <property name="text">
@@ -418,7 +430,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset>
+    <iconset resource="res.qrc">
      <normaloff>:/images/icons/814.bmp</normaloff>:/images/icons/814.bmp</iconset>
    </property>
    <property name="text">
@@ -430,7 +442,9 @@
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="res.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>actQuit</sender>

@@ -84,6 +84,8 @@ private slots:
 
 //    void on_actDockVisible_triggered();
 
+    void on_actDockFloat_triggered();
+
 private:
     Ui::MainWindow *ui;
 };

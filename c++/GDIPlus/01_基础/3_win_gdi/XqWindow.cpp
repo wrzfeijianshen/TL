@@ -18,12 +18,12 @@ ULONG_PTR token;
 void Wchar_tToString(std::string& szDst, wchar_t *wchar)
 {
 	wchar_t * wText = wchar;
-	DWORD dwNum = WideCharToMultiByte(CP_OEMCP, NULL, wText, -1, NULL, 0, NULL, FALSE);// WideCharToMultiByteµÄÔËÓÃ
-	char *psText;  // psTextÎªchar*µÄÁÙÊ±Êı×é£¬×÷Îª¸³Öµ¸østd::stringµÄÖĞ¼ä±äÁ¿
+	DWORD dwNum = WideCharToMultiByte(CP_OEMCP, NULL, wText, -1, NULL, 0, NULL, FALSE);// WideCharToMultiByteçš„è¿ç”¨
+	char *psText;  // psTextä¸ºchar*çš„ä¸´æ—¶æ•°ç»„ï¼Œä½œä¸ºèµ‹å€¼ç»™std::stringçš„ä¸­é—´å˜é‡
 	psText = new char[dwNum];
-	WideCharToMultiByte(CP_OEMCP, NULL, wText, -1, psText, dwNum, NULL, FALSE);// WideCharToMultiByteµÄÔÙ´ÎÔËÓÃ
-	szDst = psText;// std::string¸³Öµ
-	delete[]psText;// psTextµÄÇå³ı
+	WideCharToMultiByte(CP_OEMCP, NULL, wText, -1, psText, dwNum, NULL, FALSE);// WideCharToMultiByteçš„å†æ¬¡è¿ç”¨
+	szDst = psText;// std::stringèµ‹å€¼
+	delete[]psText;// psTextçš„æ¸…é™¤
 }
 
 // string to wstring
@@ -56,7 +56,7 @@ CXqWindow::CXqWindow(HINSTANCE hInst)
 
 CXqWindow::~CXqWindow()
 {
-	if (this->m_HWnd != NULL && ::IsWindow(this->m_HWnd)) // C++¶ÔÏó±»Ïú»ÙÖ®Ç°£¬Ïú»Ù´°¿Ú¶ÔÏó
+	if (this->m_HWnd != NULL && ::IsWindow(this->m_HWnd)) // C++å¯¹è±¡è¢«é”€æ¯ä¹‹å‰ï¼Œé”€æ¯çª—å£å¯¹è±¡
 	{
 		::DestroyWindow(this->m_HWnd);
 	}
@@ -104,51 +104,59 @@ void PrintString(HDC &hdc,wstring str)
 	Graphics graphics(hdc);
 	Pen pen(Color(255, 0, 0, 255));
 	SolidBrush brush(Color(255, 0, 0, 255));
-	FontFamily fontFamily(L"ËÎÌå");
+	FontFamily fontFamily(L"å®‹ä½“");
 	Font font(&fontFamily, 24, FontStyleRegular, UnitPixel);
 	graphics.DrawString(str.c_str(), -1, &font, PointF(5.0, 500.0), &brush);
-
 }
+
+void PrintString(HDC &hdc, wstring str, SolidBrush& brush, float x, float y)
+{
+	Graphics graphics(hdc);
+	FontFamily fontFamily(L"å®‹ä½“");
+	Font font(&fontFamily, 24, FontStyleRegular, UnitPixel);
+	graphics.DrawString(str.c_str(), -1, &font, PointF(x, y), &brush);
+}
+
 
 void CXqWindow::OnDraw(HDC hdc)
 {
-#if 0 ///<-- 2-3 Êä³ö×ÖÌå
+#if 0 ///<-- 2-3 è¾“å‡ºå­—ä½“
 	Graphics graphics(hdc);
 	Pen pen(Color(255, 0, 0, 255));
 	SolidBrush brush(Color(255, 0, 0, 255));
-	FontFamily fontFamily(L"ËÎÌå");
+	FontFamily fontFamily(L"å®‹ä½“");
 	Font font(&fontFamily,24,FontStyleRegular,UnitPixel);
-	graphics.DrawString(L"GDI+ ÊµÀı1", -1, &font, PointF(20.0, 20.0),&brush);
+	graphics.DrawString(L"GDI+ å®ä¾‹1", -1, &font, PointF(20.0, 20.0),&brush);
 #endif
 
 	
-#if 0 ///<-- 2-5 ÔÚ´òÓ¡»úÉè±¸ÖĞÊä³ö
+#if 0 ///<-- 2-5 åœ¨æ‰“å°æœºè®¾å¤‡ä¸­è¾“å‡º
 	DOCINFO docinfo;
-	ZeroMemory(&docinfo, sizeof(DOCINFO));// Çå¿ÕÎÄµµĞÅÏ¢
+	ZeroMemory(&docinfo, sizeof(DOCINFO));// æ¸…ç©ºæ–‡æ¡£ä¿¡æ¯
 	docinfo.cbSize = sizeof(DOCINFO);
-	docinfo.lpszDocName = L"GDIPlusPrint";// ÎÄµµÃû³Æ
+	docinfo.lpszDocName = L"GDIPlusPrint";// æ–‡æ¡£åç§°
 
-	PRINTDLG printDlg;// ½¨Á¢´òÓ¡¶Ô»°
+	PRINTDLG printDlg;// å»ºç«‹æ‰“å°å¯¹è¯
 	ZeroMemory(&printDlg, sizeof(PRINTDLG));
 	printDlg.lStructSize = sizeof(PRINTDLG);
-	printDlg.Flags = PD_RETURNDC;// ·µ»Ødc
+	printDlg.Flags = PD_RETURNDC;// è¿”å›dc
 
 	if (!PrintDlg(&printDlg))
 	{
-		MessageBox(NULL, L"½¨Á¢´òÓ¡¶Ô»°¿òÊ§°Ü", L"warning", MB_ICONWARNING);
+		MessageBox(NULL, L"å»ºç«‹æ‰“å°å¯¹è¯æ¡†å¤±è´¥", L"warning", MB_ICONWARNING);
 		return;
 	}
 	else
 	{
-		// ¿ªÊ¼¼ÇÂ¼ÎÄµµ
+		// å¼€å§‹è®°å½•æ–‡æ¡£
 		StartDoc(printDlg.hDC, &docinfo);
 		StartPage(printDlg.hDC);
 
-		Graphics graphics(printDlg.hDC);// Ê¹ÓÃ´òÓ¡»úÉè±¸»·¾³¾ä±ú½¨Á¢»æÍ¼Æ½ÃæÀà
+		Graphics graphics(printDlg.hDC);// ä½¿ç”¨æ‰“å°æœºè®¾å¤‡ç¯å¢ƒå¥æŸ„å»ºç«‹ç»˜å›¾å¹³é¢ç±»
 
-		// ÒÔÏÂÊä³ö¶¼ÔÚ´òÓ¡»úÉè±¸¾ä±úÖĞ½øĞĞ
+		// ä»¥ä¸‹è¾“å‡ºéƒ½åœ¨æ‰“å°æœºè®¾å¤‡å¥æŸ„ä¸­è¿›è¡Œ
 		
-		Image image(L"./gidplus_data/test.bmp");// ¼ÓÔØÍ¼Æ¬
+		Image image(L"./gidplus_data/test.bmp");// åŠ è½½å›¾ç‰‡
 		graphics.DrawImage(&image, 0.0f, 0.0f);
 
 		Pen pen(Color(255, 0, 0, 0));
@@ -156,12 +164,12 @@ void CXqWindow::OnDraw(HDC hdc)
 		graphics.DrawEllipse(&pen, 200, 500, 400, 650);
 		graphics.DrawLine(&pen, 200, 500, 400, 650);
 
-		// ¿ªÊ¼´òÓ¡
+		// å¼€å§‹æ‰“å°
 		EndPage(printDlg.hDC);
 		EndDoc(printDlg.hDC);
 	}
 
-	// ÊÍ·Å´òÓ¡×ÊÔ´
+	// é‡Šæ”¾æ‰“å°èµ„æº
 	if (printDlg.hDevMode)
 	{
 		GlobalFree(printDlg.hDevMode);
@@ -177,11 +185,11 @@ void CXqWindow::OnDraw(HDC hdc)
 	}
 #endif
 	
-#if 0 ///<-- 2-6 »æÖÆÖ±Ïß
+#if 0 ///<-- 2-6 ç»˜åˆ¶ç›´çº¿
 	Graphics graphics(hdc);
 	Pen blackPen(Color(255, 0, 0, 0), 3);
 
-	// µãµÄÎ»ÖÃ
+	// ç‚¹çš„ä½ç½®
 	PointF point1(10.0f,10.0f);
 	PointF point2(10.0f, 100.0f);
 	PointF point3(50.0f, 50.0f);
@@ -189,7 +197,7 @@ void CXqWindow::OnDraw(HDC hdc)
 	PointF points[4] = { point1, point2, point3, point4 };
 	PointF * pPoints = points;
 
-	// »æÖÆ¶àÌõÏß
+	// ç»˜åˆ¶å¤šæ¡çº¿
 	graphics.DrawLines(&blackPen, pPoints, 4);
 	Pen redPen(Color(255, 255, 0, 0), 3);
 
@@ -197,11 +205,11 @@ void CXqWindow::OnDraw(HDC hdc)
 	graphics.DrawLine(&redPen, 50, 20, 100, 100);
 #endif
 	
-#if 0 ///<-- 2-7 »æÖÆ¾ØĞÎ
+#if 0 ///<-- 2-7 ç»˜åˆ¶çŸ©å½¢
 	Graphics graphics(hdc);
 	Pen blackPen(Color(255, 0, 0, 0),3);
 
-	// ¶¨Òå¾ØĞÎ
+	// å®šä¹‰çŸ©å½¢
 	RectF rect1(10.0f,10.0f,100.0f,50.0f);
 	RectF rect2(40.0f, 40.0f, 100.0f, 50.0f);
 	RectF rect3(80.0f, 4.0f, 50.0f, 100.0f);
@@ -214,26 +222,26 @@ void CXqWindow::OnDraw(HDC hdc)
 	graphics.DrawRectangle(&redPen, rect4);
 #endif
 
-#if 0 ///<-- 2-8 »æÖÆ¼òµ¥ÇúÏßºÍ±´Èû¶ûÇúÏß
-	#if 0  // DrawCurve »æÖÆÇúÏß
+#if 0 ///<-- 2-8 ç»˜åˆ¶ç®€å•æ›²çº¿å’Œè´å¡å°”æ›²çº¿
+	#if 0  // DrawCurve ç»˜åˆ¶æ›²çº¿
 	Graphics graphics(hdc);
 	Pen greenPen(Color::Green, 3);
 	Pen redPen(Color::Red, 3);
 
-	// ¶¨ÒåÇúÏß¾­¹ıµÄµã
+	// å®šä¹‰æ›²çº¿ç»è¿‡çš„ç‚¹
 	Point point1(100, 100);
 	Point point2(200,50);
 	Point point3(700, 10);
 	Point point4(500, 100);
 
 	Point curvePoints[7] = { point1, point2, point3, point4 };
-	// »æÖÆÇúÏß
+	// ç»˜åˆ¶æ›²çº¿
 	graphics.DrawCurve(&greenPen, curvePoints, 7);
 	
-	// Ê¹ÓÃºìÉ«»­±Ê»æÖÆÍäÇúÇ¿¶ÈÎª1.3µÄÇúÏß
+	// ä½¿ç”¨çº¢è‰²ç”»ç¬”ç»˜åˆ¶å¼¯æ›²å¼ºåº¦ä¸º1.3çš„æ›²çº¿
 	graphics.DrawCurve(&redPen, curvePoints, 7, 1.3f);
 
-	// »æÖÆÇúÏßµÄ¶¨Òåµã(ºìÉ«)
+	// ç»˜åˆ¶æ›²çº¿çš„å®šä¹‰ç‚¹(çº¢è‰²)
 	SolidBrush redBrush(Color::Red);
 	graphics.FillEllipse(&redBrush, Rect(95, 95, 10, 10));
 	graphics.FillEllipse(&redBrush, Rect(195, 75, 10, 10));
@@ -241,7 +249,7 @@ void CXqWindow::OnDraw(HDC hdc)
 	graphics.FillEllipse(&redBrush, Rect(795, 95, 10, 10));
 	#endif
 
-	#if 0 // Ê¹ÓÃDrawColosedCurve»æÖÆÇúÏß
+	#if 0 // ä½¿ç”¨DrawColosedCurveç»˜åˆ¶æ›²çº¿
 	Graphics graphics(hdc);
 	Pen greenPen(Color::Green, 3);
 	PointF point1(100.f, 100.f);
@@ -253,7 +261,7 @@ void CXqWindow::OnDraw(HDC hdc)
 	PointF point7(500.f, 500.f);
 	PointF curvePoints[7] = { point1, point2, point3, point4, point5, point6, point7 };
 	graphics.DrawClosedCurve(&greenPen, curvePoints, 7);
-	// »æÖÆÇúÏßµÄ¶¨Òåµã(ºìµã)
+	// ç»˜åˆ¶æ›²çº¿çš„å®šä¹‰ç‚¹(çº¢ç‚¹)
 	SolidBrush redBrush(Color::Red);
 	graphics.FillEllipse(&redBrush, Rect(95, 95, 10, 10));
 	graphics.FillEllipse(&redBrush, Rect(795, 95, 10, 10));
@@ -266,34 +274,34 @@ void CXqWindow::OnDraw(HDC hdc)
 	#endif
 #endif
 
-#if 0 ///<-- 2-9 »æÖÆ±´Èû¶ûÇúÏß
-	// ±´Èû¶ûÇúÏßÍ¨¹ı4µãÀ´Ö¸¶¨ÇúÏß£¬Á½¸ö¶ËµãºÍÁ½¸ö¿ØÖÆµã£¬ÇúÏßÁ¬½ÓÁ½¸ö¶Ëµã£¬²»Í¨¹ı¿ØÖÆµã£¬¿ØÖÆµãµÄÎ»ÖÃ¿ØÖÆÇúÏßµÄÍäÇú·½Ïò¡£
+#if 0 ///<-- 2-9 ç»˜åˆ¶è´å¡å°”æ›²çº¿
+	// è´å¡å°”æ›²çº¿é€šè¿‡4ç‚¹æ¥æŒ‡å®šæ›²çº¿ï¼Œä¸¤ä¸ªç«¯ç‚¹å’Œä¸¤ä¸ªæ§åˆ¶ç‚¹ï¼Œæ›²çº¿è¿æ¥ä¸¤ä¸ªç«¯ç‚¹ï¼Œä¸é€šè¿‡æ§åˆ¶ç‚¹ï¼Œæ§åˆ¶ç‚¹çš„ä½ç½®æ§åˆ¶æ›²çº¿çš„å¼¯æ›²æ–¹å‘ã€‚
 	Graphics graphics(hdc);
 	Pen greenPen(Color::Green);
 	Pen redPen(Color::Red);
 
-	// ¶¨ÒåÇúÏßÆğµã
+	// å®šä¹‰æ›²çº¿èµ·ç‚¹
 	Point startPoint(100, 100);
 	
-	// ¶¨ÒåÁ½¸ö¿ØÖÆµã
+	// å®šä¹‰ä¸¤ä¸ªæ§åˆ¶ç‚¹
 	Point contronlPoint1(200, 10);
 	Point contronlPoint2(350, 50);
 
-	// ¶¨ÒåÇúÏßÖÕµã
+	// å®šä¹‰æ›²çº¿ç»ˆç‚¹
 	Point endPoint(500, 100);
 
-	// »æÖÆÉÏÊöËÄ¸öµãÎ»ÖÃ£¬ÆğµãºìÉ«£¬¿ØÖÆµãÂÌÉ«
+	// ç»˜åˆ¶ä¸Šè¿°å››ä¸ªç‚¹ä½ç½®ï¼Œèµ·ç‚¹çº¢è‰²ï¼Œæ§åˆ¶ç‚¹ç»¿è‰²
 	graphics.FillEllipse(&SolidBrush(Color::Red),100,100,10,10);
 	graphics.FillEllipse(&SolidBrush(Color::Red), 500, 100, 10, 10);
 	graphics.FillEllipse(&SolidBrush(Color::Green), 200, 10, 10, 10);
 	graphics.FillEllipse(&SolidBrush(Color::Green), 350, 50, 10, 10);
-	graphics.DrawBezier(&greenPen, startPoint, contronlPoint1, contronlPoint2, endPoint);// »æÖÆ±´Èû¶ûÇúÏß
+	graphics.DrawBezier(&greenPen, startPoint, contronlPoint1, contronlPoint2, endPoint);// ç»˜åˆ¶è´å¡å°”æ›²çº¿
 #endif
-#if 0 ///<-- 2-10 »æÖÆ¶à±ßĞÎ
+#if 0 ///<-- 2-10 ç»˜åˆ¶å¤šè¾¹å½¢
 	Graphics graphics(hdc);
 	Pen blackPen(Color(255, 0, 0, 0), 3);
 
-	// ¶¨Òå¶à±ßĞÎ¶Ëµã
+	// å®šä¹‰å¤šè¾¹å½¢ç«¯ç‚¹
 	Point point1(100, 100);
 	Point point2(200, 130);
 	Point point3(150, 200);
@@ -301,70 +309,70 @@ void CXqWindow::OnDraw(HDC hdc)
 	Point point5(0, 130);
 	Point points[5] = { point1, point2, point3, point4, point5 };
 	
-	// »æÖÆ¶à±ßĞÎ
+	// ç»˜åˆ¶å¤šè¾¹å½¢
 	graphics.DrawPolygon(&blackPen, points, 5);
 #endif
 
-#if 0 ///<-- 2-11 »æÖÆ»¡Ïß
+#if 0 ///<-- 2-11 ç»˜åˆ¶å¼§çº¿
 	Graphics graphics(hdc);
 	Pen redPen(Color::Red, 3);
 
 	Rect ellipseRect(10, 10, 200, 100);
 	REAL startAngle = 0.f;
 	REAL sweepAngle = 90.f;
-	// »æÖÆ¾ØĞÎ
+	// ç»˜åˆ¶çŸ©å½¢
 	graphics.DrawRectangle(&Pen(Color::Black, 3), ellipseRect);
-	// »æÖÆ»¡Ïß
+	// ç»˜åˆ¶å¼§çº¿
 	graphics.DrawArc(&redPen, ellipseRect, startAngle, sweepAngle);
 #endif
 
-#if 0 ///<-- 2-12 ÉÈĞÎ»æÖÆ
+#if 0 ///<-- 2-12 æ‰‡å½¢ç»˜åˆ¶
 	Graphics graphics(hdc);
 	Pen blackPen(Color(255, 0, 0, 0), 3);
 
-	// ¶¨ÒåÉÈĞÎ: ¾ØĞÎ + ½Ç¶È,½Ç¶È£¬Ë³Ê±Õë
+	// å®šä¹‰æ‰‡å½¢: çŸ©å½¢ + è§’åº¦,è§’åº¦ï¼Œé¡ºæ—¶é’ˆ
 	Rect ellipseRect(0, 0, 200, 100);
 	REAL startAngle = 0.f;
 	REAL sweepAngle = 45.f;
 	
-	// »æÖÆÍÖÔ²ÉÈĞÎ(³¤¶Ì°ë¾¶²»ÏàµÈ)
+	// ç»˜åˆ¶æ¤­åœ†æ‰‡å½¢(é•¿çŸ­åŠå¾„ä¸ç›¸ç­‰)
 	graphics.DrawPie(&blackPen, ellipseRect, startAngle, sweepAngle);
 #endif
 
-#if 0 ///<-- 2-13 Ìî³äÇøÓò
-	// ÏÈ¹¹Ôì»­Ë¢£¬ºó½øĞĞÇøÓòÌî³ä
+#if 0 ///<-- 2-13 å¡«å……åŒºåŸŸ
+	// å…ˆæ„é€ ç”»åˆ·ï¼Œåè¿›è¡ŒåŒºåŸŸå¡«å……
 	Graphics graphics(hdc);
 	SolidBrush bluePen(Color::Blue);// Color(255,0,0,255)
-	// ÇúÏß¶¨Òåµã
+	// æ›²çº¿å®šä¹‰ç‚¹
 	PointF point1(100.f, 100.f);
 	PointF point2(200.f, 50.f);
 	PointF point3(250.f, 200.f);
 	PointF point4(50.f, 150.f);
 	PointF points[4] = { point1, point2, point3, point4 };
 	
-	// Ìî³äÇøÓò
+	// å¡«å……åŒºåŸŸ
 	graphics.FillClosedCurve(&bluePen, points, 4,FillModeAlternate,1.);
 	
-	// »æÖÆÇúÏß¶¨Òåµã
+	// ç»˜åˆ¶æ›²çº¿å®šä¹‰ç‚¹
 	for (int i = 0; i < 4;i++)
 	{
 		graphics.FillEllipse(&SolidBrush(Color::Red), RectF(points[i].X - 5, points[i].Y - 5, 10, 10));
 	}
 
-	// Ìî³ä¾ØĞÎ
+	// å¡«å……çŸ©å½¢
 	Rect ellipseRect(10, 240, 200, 100);
 	graphics.FillRectangle(&bluePen, ellipseRect);
 #endif
 
-#if 0 ///<-- 2-14 Íù¾µ¿òÖĞÌí¼ÓÕÕÆ¬ ---- 2-15 ÂÔ,ÒòÔ´ÂëÖĞÎŞÍ¼Æ¬£¬´ıÑ§Ï°ÕûÀí
+#if 0 ///<-- 2-14 å¾€é•œæ¡†ä¸­æ·»åŠ ç…§ç‰‡ ---- 2-15 ç•¥,å› æºç ä¸­æ— å›¾ç‰‡ï¼Œå¾…å­¦ä¹ æ•´ç†
 
 #endif
-#if 0 ///<-- 2-16Êä³öÎÄ±¾
+#if 0 ///<-- 2-16è¾“å‡ºæ–‡æœ¬
 	Graphics graphics(hdc);
 	Font myFont(L"Arial", 26);
 	RectF layoutRect(10.f, 10.f, 200.f, 50.f);
 
-	// ÉèÖÃË®Æ½¾ÓÖĞºÍ´¹Ö±¾ÓÖĞ
+	// è®¾ç½®æ°´å¹³å±…ä¸­å’Œå‚ç›´å±…ä¸­
 	StringFormat format;
 	format.SetAlignment(StringAlignmentCenter);
 	format.SetLineAlignment(StringAlignmentCenter);
@@ -373,47 +381,47 @@ void CXqWindow::OnDraw(HDC hdc)
 	//string str("Hello GDI+");
 	//wstring szDst;
 	//StringToWstring(szDst,str);
-	wstring szDst(L"ÄãºÃ GDI+");
+	wstring szDst(L"ä½ å¥½ GDI+");
 
-	// »æÖÆ×Ö
+	// ç»˜åˆ¶å­—
 	graphics.DrawString(szDst.c_str(), szDst.size(), &myFont, layoutRect, &format, &blackBrush);
-	// »æÖÆ¾ØĞÎ
+	// ç»˜åˆ¶çŸ©å½¢
 	graphics.DrawRectangle(&Pen(Color::Green, 3), layoutRect);
 #endif
 
-#if 0 ///<-- 3-1 »­Ë¢ÖĞ¹¹ÔìÎÆÀí»­±Ê
-	// »­Ë¢Ã»ÓĞ¿í¶È£¬»­±ÊÓĞ¿í¶È
+#if 0 ///<-- 3-1 ç”»åˆ·ä¸­æ„é€ çº¹ç†ç”»ç¬”
+	// ç”»åˆ·æ²¡æœ‰å®½åº¦ï¼Œç”»ç¬”æœ‰å®½åº¦
 	Graphics graphics(hdc);
 
-	// ¼ÓÔØÎÆÀíÍ¼Æ¬
+	// åŠ è½½çº¹ç†å›¾ç‰‡
 	Image image(L"./gidplus_data/Texture.bmp");
 	
-	// ¹¹ÔìÎÆÀí»­Ë¢
+	// æ„é€ çº¹ç†ç”»åˆ·
 	TextureBrush tBrush(&image);
 
-	// ½«»­Ë¢´«Èë»­±ÊµÄ¹¹Ôìº¯Êı
+	// å°†ç”»åˆ·ä¼ å…¥ç”»ç¬”çš„æ„é€ å‡½æ•°
 	Pen texturePen(&tBrush, 30);
 	graphics.DrawEllipse(&texturePen, 100, 20, 200, 100);
 	cout << texturePen.GetWidth() << endl;
 
 	wostringstream oss;
-	oss << L"»­±Ê¿í¶È : "<< texturePen.GetWidth();
+	oss << L"ç”»ç¬”å®½åº¦ : "<< texturePen.GetWidth();
 	wstring str = oss.str();
-	PrintString(hdc, str);// Êä³öµ½ÆÁÄ»
+	PrintString(hdc, str);// è¾“å‡ºåˆ°å±å¹•
 #endif
 
-#if 0 ///<-- 3-2 »­±ÊµÄÏßĞÍ·ç¸ñ
+#if 0 ///<-- 3-2 ç”»ç¬”çš„çº¿å‹é£æ ¼
 	Graphics graphics(hdc);
 	Pen blackPen(Color::Black, 5);
 	
-	// ³£ÓÃµÄÏßĞÍ»æÖÆÖ±Ïß
+	// å¸¸ç”¨çš„çº¿å‹ç»˜åˆ¶ç›´çº¿
 	/*
-		DashStyleSolid,          // 0 ÊµÏß
-		DashStyleDash,           // 1 ĞéÏß
-		DashStyleDot,            // 2 µãÏß
-		DashStyleDashDot,        // 3 µã»®Ïß
-		DashStyleDashDotDot,     // 4 Ë«µã»®Ïß
-		DashStyleCustom          // 5 ²»¹æÔò×Ô¶¨Òå»­±ÊÏßĞÍ
+		DashStyleSolid,          // 0 å®çº¿
+		DashStyleDash,           // 1 è™šçº¿
+		DashStyleDot,            // 2 ç‚¹çº¿
+		DashStyleDashDot,        // 3 ç‚¹åˆ’çº¿
+		DashStyleDashDotDot,     // 4 åŒç‚¹åˆ’çº¿
+		DashStyleCustom          // 5 ä¸è§„åˆ™è‡ªå®šä¹‰ç”»ç¬”çº¿å‹
 		*/
 	int i = 0;
 	for (i = 0; i < 6; i++)
@@ -422,13 +430,13 @@ void CXqWindow::OnDraw(HDC hdc)
 		graphics.DrawLine(&blackPen, 10,30 * i + 20, 300, 30 * i + 20);
 	}
 
-	// Ê¹ÓÃ×Ô¶¨ÒåÏßĞÍ
+	// ä½¿ç”¨è‡ªå®šä¹‰çº¿å‹
 	REAL dashVals[4] =
 	{
-		5.f,// Ïß³¤5ÏñËØ
-		2.f,// ¼ä¶Ï2ÏßÊø
-		15.f,// Ïß³¤15ÏñËØ
-		4.f// ¼ä¶Ï4ÏñËØ
+		5.f,// çº¿é•¿5åƒç´ 
+		2.f,// é—´æ–­2çº¿æŸ
+		15.f,// çº¿é•¿15åƒç´ 
+		4.f// é—´æ–­4åƒç´ 
 	};
 
 	blackPen.SetDashPattern(dashVals,4);
@@ -438,60 +446,60 @@ void CXqWindow::OnDraw(HDC hdc)
 	i++;
 	REAL dashVals2[6] =
 	{
-		5.f,// Ïß³¤5ÏñËØ
-		2.f,// ¼ä¶Ï2ÏßÊø
-		10.f,// Ïß³¤5ÏñËØ
-		4.f,// ¼ä¶Ï2ÏñËØ
-		8.f,// Ïß³¤5ÏñËØ
-		2.f// ¼ä¶Ï2ÏñËØ
+		5.f,// çº¿é•¿5åƒç´ 
+		2.f,// é—´æ–­2çº¿æŸ
+		10.f,// çº¿é•¿5åƒç´ 
+		4.f,// é—´æ–­2åƒç´ 
+		8.f,// çº¿é•¿5åƒç´ 
+		2.f// é—´æ–­2åƒç´ 
 	};
 
-	blackPen.SetDashPattern(dashVals2, 6);// »ñÈ¡ÏßĞÍ·ç¸ñ
+	blackPen.SetDashPattern(dashVals2, 6);// è·å–çº¿å‹é£æ ¼
 	blackPen.SetColor(Color::Red);
 	graphics.DrawLine(&blackPen, 10, 30 * i + 40, 600, 30 * i + 40);
 
 	wostringstream oss;
-	oss << L"ÏßĞÍ¶¨Òåµã×ÜÊı : " << blackPen.GetDashPatternCount();
+	oss << L"çº¿å‹å®šä¹‰ç‚¹æ€»æ•° : " << blackPen.GetDashPatternCount();
 	wstring str = oss.str();
-	PrintString(hdc, str);// Êä³öµ½ÆÁÄ»
+	PrintString(hdc, str);// è¾“å‡ºåˆ°å±å¹•
 #endif
 
-#if 0 ///<-- 3-3 »­±ÊµÄÁ½ÖÖ¶ÔÆë·½Ê½
-	// PenAlignment ¾ÓÖĞºÍÇ¶Èë
+#if 0 ///<-- 3-3 ç”»ç¬”çš„ä¸¤ç§å¯¹é½æ–¹å¼
+	// PenAlignment å±…ä¸­å’ŒåµŒå…¥
 	Graphics graphics(hdc);
 	Pen redPen(Color::Red, 1);
 	Pen blackPen(Color::Black, 8);
 	Pen greenPen(Color::Green, 16);
 
-	// »æÖÆÕı·½ĞÎ»ùÏß
+	// ç»˜åˆ¶æ­£æ–¹å½¢åŸºçº¿
 	graphics.DrawRectangle(&redPen, 10, 10, 100, 100);
 	graphics.DrawRectangle(&redPen, 120, 10, 100, 100);
 
-	// ÉèÖÃ¶ÔÆë·½Ê½Îª¾ÓÖĞ, »­Ô²
+	// è®¾ç½®å¯¹é½æ–¹å¼ä¸ºå±…ä¸­, ç”»åœ†
 	graphics.DrawEllipse(&greenPen, 10, 10, 100, 100);
 	graphics.DrawEllipse(&blackPen, 10, 10, 100, 100);
 
-	// ÉèÖÃ¶ÔÆë·½Ê½ÎªInset
+	// è®¾ç½®å¯¹é½æ–¹å¼ä¸ºInset
 	greenPen.SetAlignment(PenAlignmentInset);
 	blackPen.SetAlignment(PenAlignmentInset);
 	graphics.DrawEllipse(&greenPen, 120, 10, 100, 100);
 	graphics.DrawEllipse(&blackPen, 120, 10, 100, 100);
 #endif
 
-#if 0 ///<-- 3-4 »­±ÊµÄËõ·ÅºÍĞı×ª±ä»»
+#if 0 ///<-- 3-4 ç”»ç¬”çš„ç¼©æ”¾å’Œæ—‹è½¬å˜æ¢
 	Graphics graphics(hdc);
 
-	// ¹¹Ôì¿í¶ÈÎª5µÄÀ¶É«»­±Ê
+	// æ„é€ å®½åº¦ä¸º5çš„è“è‰²ç”»ç¬”
 	Pen pen(Color::Blue, 5);
 	graphics.DrawEllipse(&pen, 50, 50, 200, 200);
 
-	// ½«»­±ÊÔÚ´¹Ö±·½ÏòÉÏÀ©³ä6±¶£¬Ë®Æ½·½Ïò±£³Ö²»±ä
+	// å°†ç”»ç¬”åœ¨å‚ç›´æ–¹å‘ä¸Šæ‰©å……6å€ï¼Œæ°´å¹³æ–¹å‘ä¿æŒä¸å˜
 	pen.ScaleTransform(1, 6);
 
-	// Ê¹ÓÃÎ´¾­Ğı×ª´¦ÀíµÄ»­±Ê»­Ô²
+	// ä½¿ç”¨æœªç»æ—‹è½¬å¤„ç†çš„ç”»ç¬”ç”»åœ†
 	graphics.DrawEllipse(&pen, 300, 50, 200, 200);
 
-	// ÒÀ´Î½«»­±ÊĞı×ª60¡ã¡¢120¡ã¡¢180¡ã
+	// ä¾æ¬¡å°†ç”»ç¬”æ—‹è½¬60Â°ã€120Â°ã€180Â°
 	pen.RotateTransform(60,MatrixOrderAppend);
 	graphics.DrawEllipse(&pen, 600, 50, 200, 200);
 
@@ -505,14 +513,14 @@ void CXqWindow::OnDraw(HDC hdc)
 	graphics.DrawEllipse(&pen, 600, 300, 200, 200);
 #endif
 
-#if 0 ///<-- 3-5 »­±ÊµÄ×Ô¶¨ÒåÏßÃ±
+#if 0 ///<-- 3-5 ç”»ç¬”çš„è‡ªå®šä¹‰çº¿å¸½
 	Graphics graphics(hdc);
 	GraphicsPath startPath, endPath;
 
-	// Â·¾¶ÖĞÌí¼ÓÒ»¸ö¾ØĞÎ
+	// è·¯å¾„ä¸­æ·»åŠ ä¸€ä¸ªçŸ©å½¢
 	startPath.AddRectangle(Rect(-10, -5, 20, 10));
 
-	// ¹¹Ôì½áÊøµãÏßÃ±µÄÍâ¹ÛºÍ¼ıÍ·
+	// æ„é€ ç»“æŸç‚¹çº¿å¸½çš„å¤–è§‚å’Œç®­å¤´
 	endPath.AddLine(0, -20, 10, 0);
 	endPath.AddLine(0, -20, -10, 0);
 	endPath.AddLine(0, -10, 10, 0);
@@ -520,11 +528,11 @@ void CXqWindow::OnDraw(HDC hdc)
 	
 	Rect rect(10, - 5, 20, 10);
 	Pen pen(Color::Red, 2);
-	// ½«Â·¾¶×÷ÎªÏßÃ±Íâ¹Û
+	// å°†è·¯å¾„ä½œä¸ºçº¿å¸½å¤–è§‚
 	CustomLineCap custCap(NULL, &startPath);
 	CustomLineCap endCap(NULL, &endPath);
 
-	// ÉèÖÃ»­±ÊÆğµãÖÕµãµÄ×Ô¶¨ÒåÏßÃ±
+	// è®¾ç½®ç”»ç¬”èµ·ç‚¹ç»ˆç‚¹çš„è‡ªå®šä¹‰çº¿å¸½
 	pen.SetCustomStartCap(&custCap);
 	pen.SetCustomEndCap(&endCap);
 	graphics.DrawLine(&pen, 20, 30, 300, 30);
@@ -540,38 +548,38 @@ void CXqWindow::OnDraw(HDC hdc)
 
 #endif
 
-#if 0 ///<-- 3-7 ¶¯Ì¬»æÖÆº¬ÓĞÍ¸Ã÷¶ÈµÄÏßÌõ
+#if 0 ///<-- 3-7 åŠ¨æ€ç»˜åˆ¶å«æœ‰é€æ˜åº¦çš„çº¿æ¡
 	Graphics graphics(hdc);
 	Pen bluePen(Color::Blue);
 	Pen redPen(Color::Red);
 
-	// »æÖÆÍøÏß
+	// ç»˜åˆ¶ç½‘çº¿
 	int y = 256;
 	for (int x = 0; x < 256; x+=5)
 	{
 		graphics.DrawLine(&bluePen, 0, y, x, 0);
 		graphics.DrawLine(&redPen, 256, y, x, 256);
 		y -= 5;
-		Sleep(50);// ÑÓÊ±¿´µ½Ğ§¹û
+		Sleep(50);// å»¶æ—¶çœ‹åˆ°æ•ˆæœ
 	}
 
-	// Í¸Ã÷¶È´ÓÉÏµ½ÏÂµİ¼õ
+	// é€æ˜åº¦ä»ä¸Šåˆ°ä¸‹é€’å‡
 	for (y = 0; y < 256;y++)
 	{
 		Pen greenPen(Color(y,0,255,0));
 		graphics.DrawLine(&greenPen,0,y,256, y);
-		Sleep(20);// ÑÓÊ±¿´µ½Ğ§¹û
+		Sleep(20);// å»¶æ—¶çœ‹åˆ°æ•ˆæœ
 	}
-	// Í¸Ã÷¶È´Ó×óµ½ÓÒµİ¼õ
+	// é€æ˜åº¦ä»å·¦åˆ°å³é€’å‡
 	for (int x = 0; x < 256; x++)
 	{
 		Pen greenPen(Color(x, 0, 255, 0));
 		graphics.DrawLine(&greenPen, x, 100, x, 200);
-		Sleep(20);// ÑÓÊ±¿´µ½Ğ§¹û
+		Sleep(20);// å»¶æ—¶çœ‹åˆ°æ•ˆæœ
 	}
 #endif
-#if 0 ///<-- 3-8 µ¥É«»­Ë¢Ìî³äÇøÓò
-	// »­Ë¢Ö»ÊÇÌî³äÇøÓò£¬ÎŞ¿í¶È³¤¶È¶øÑÔ
+#if 0 ///<-- 3-8 å•è‰²ç”»åˆ·å¡«å……åŒºåŸŸ
+	// ç”»åˆ·åªæ˜¯å¡«å……åŒºåŸŸï¼Œæ— å®½åº¦é•¿åº¦è€Œè¨€
 	Graphics graphics(hdc);
 	SolidBrush greenBrush(Color::Green);
 	PointF Point1(100.f, 100.f);
@@ -580,7 +588,7 @@ void CXqWindow::OnDraw(HDC hdc)
 	PointF Point4(50.f, 150.f);
 	PointF Point5(100.f, 100.f);
 
-	// Ìî³ä±ÕºÏÇúÏß
+	// å¡«å……é—­åˆæ›²çº¿
 	PointF points[4] = { Point1, Point2, Point3, Point4 };
 	graphics.FillClosedCurve(&greenBrush, points, 4, FillModeAlternate, 1.);
 	
@@ -590,29 +598,29 @@ void CXqWindow::OnDraw(HDC hdc)
 	PointF Point9(350.f, 150.f);
 	PointF Point10(400.f, 100.f);
 	PointF pointsPoly[5] = { Point6, Point7, Point8, Point9, Point10 };
-	// Ìî³ä¶à±ßĞÎÇøÓò
+	// å¡«å……å¤šè¾¹å½¢åŒºåŸŸ
 	graphics.FillPolygon(&greenBrush, pointsPoly, 5);
 #endif
 
-#if 1 // 3-9 Ìî³äÕıÒ¶ÇúÏß
+#if 0 // 3-9 å¡«å……æ­£å¶æ›²çº¿
 	Graphics graphics(hdc);
 
-	// ´´½¨ÂÌÉ«»­Ë¢
+	// åˆ›å»ºç»¿è‰²ç”»åˆ·
 	SolidBrush greenBrush(Color::Green);
 
-	// Ö¸¶¨ÖĞĞÄµã
+	// æŒ‡å®šä¸­å¿ƒç‚¹
 	int cx = 300;
 	int cy = 300;
-	int leafLength = 100;// ÉèÖÃÒ¶³¤
-	int leafNum = 5;// Ò¶Æ¬ÊıÁ¿
+	int leafLength = 100;// è®¾ç½®å¶é•¿
+	int leafNum = 5;// å¶ç‰‡æ•°é‡
 	float PI = 3.14;
 	int x2, y2;
 	int x, y, r;
 
-	// ´´½¨Í¼ĞÎÂ·¾¶¶ÔÏó£¬ÈİÄÉÕıÒ¶ÇúÏß±ß½çÏß
+	// åˆ›å»ºå›¾å½¢è·¯å¾„å¯¹è±¡ï¼Œå®¹çº³æ­£å¶æ›²çº¿è¾¹ç•Œçº¿
 	GraphicsPath tmpPath(FillModeAlternate);
 
-	// Éú³ÉÇúÏß±ß½çÊı¾İ£¬½Ç¶È±ä»¯Ò»ÖÜÎªPI*2;
+	// ç”Ÿæˆæ›²çº¿è¾¹ç•Œæ•°æ®ï¼Œè§’åº¦å˜åŒ–ä¸€å‘¨ä¸ºPI*2;
 	for (float i = 0.f; i < PI * 2 + 0.f;i+=PI/180)
 	{
 		r = abs(leafLength*cos(leafNum*i));
@@ -625,11 +633,186 @@ void CXqWindow::OnDraw(HDC hdc)
 	}
 	graphics.FillPath(&greenBrush, &tmpPath);
 
-	// »æÖÆÖĞĞÄ×ø±êÖá
+	// ç»˜åˆ¶ä¸­å¿ƒåæ ‡è½´
 	Pen pen(Color::Gray, 1);
 	graphics.DrawLine(&pen, 0, cy, cx * 2, cy);
 	graphics.DrawLine(&pen, cx, 0, cx, cy*2);
 
+#endif
+
+#if 0 // 3-10 ä½¿ç”¨ä¸åŒå½±çº¿ç”»åˆ·
+	// å½±çº¿ç”»åˆ·æ˜¯ä½¿ç”¨åŒæ ·çš„å°å›¾æ¡ˆæ¥å¡«å……ä¸€ä¸ªåŒºåŸŸ,å¸¸è§çš„å›¾æ¡ˆç”±æ¨ªçº¿ç«–çº¿,æ–œçº¿
+	// HatchBrush ç”»åˆ·
+	Graphics graphics(hdc);
+	//graphics.Clear(Color::White);
+
+	//æ„é€ å½±çº¿ç”»åˆ·çš„å‰åè‰²å½©
+	Color black = Color::Black;
+	Color white = Color::White;
+	int x = 0;
+	int y = 0;
+	for (int i = 0; i < (int)HatchStyleTotal; i++)
+	{
+		HatchBrush brush((HatchStyle)i, black, white);
+		if (20 + x * 100 > 600)
+		{
+			y++;
+			x = 0;
+		}
+		else
+		{
+			x++;
+		}
+		
+		graphics.FillRectangle(&brush, 20 + x*105, 20+ y*55, 100, 50);
+		
+	}
+#if 0
+	//ä½¿ç”¨ç¬¬ä¸€ç§é£æ ¼çš„å½±çº¿ç”»åˆ· æ¨ªçº¿
+	HatchBrush brush(HatchStyleHorizontal, black, white);
+	graphics.FillRectangle(&brush, 20, 20, 100, 50);
+
+	//ä½¿ç”¨ç¬¬äºŒç§é£æ ¼çš„å½±çº¿ç”»åˆ·
+	HatchBrush brush1(HatchStyleVertical, black, white);
+	graphics.FillRectangle(&brush1, 120, 20, 100, 50);
+
+	//ä½¿ç”¨ç¬¬ä¸‰ç§é£æ ¼çš„å½±çº¿ç”»åˆ·
+	HatchBrush brush2(HatchStyleForwardDiagonal, black, white);
+	graphics.FillRectangle(&brush2, 220, 20, 100, 50);
+
+	//ä½¿ç”¨ç¬¬å››ç§é£æ ¼çš„å½±çº¿ç”»åˆ·
+	HatchBrush brush3(HatchStyleBackwardDiagonal, black, white);
+	graphics.FillRectangle(&brush3, 320, 20, 100, 50);
+
+	//ä½¿ç”¨ç¬¬äº”ç§é£æ ¼çš„å½±çº¿ç”»åˆ·
+	HatchBrush brush4(HatchStyleCross, black, white);
+	graphics.FillRectangle(&brush4, 420, 20, 100, 50);
+
+	//ä½¿ç”¨ç¬¬å…­ç§é£æ ¼çš„å½±çº¿ç”»åˆ·
+	HatchBrush brush5(HatchStyleDiagonalCross, black, white);
+	graphics.FillRectangle(&brush5, 520, 20, 100, 50);
+#endif
+#endif
+#if 0 // 3-11 ä½¿ç”¨ä¸åŒå½±çº¿ç”»åˆ·
+	Graphics graphics(hdc);
+	//è®¾å®šç”»åˆ·çš„å‰æ™¯è‰²ä¸ºé»‘è‰²ï¼ŒèƒŒæ™¯è‰²ä¸ºç™½è‰²
+	Color black = Color::Black;
+	Color white = Color::White;
+
+	//é¢„å®šä¹‰å¡«å……åŒºåŸŸçš„å®½åº¦åŠé«˜åº¦
+	int WIDTH = 140;
+	int HEIGHT = 40;
+
+	//è®¾å®šè¾“å‡ºæ–‡æœ¬æ‰€éœ€ä¿¡æ¯
+	SolidBrush redBrush(Color::Red);
+	Font myFont(L"Arial", 10);
+
+	//column_countè¡¨æ˜åœ¨æ¯ä¸€è¡Œèƒ½å¤Ÿç»˜åˆ¶çŸ©å½¢çš„æ€»æ•°
+	int column_count = 1000 / WIDTH;
+	int rol = 0;
+	int column = 0;
+
+	//åœ¨å½“å‰çª—å£ä½¿ç”¨æ‰€æœ‰çš„å½±çº¿ç”»åˆ·ç§é£æ ¼å¡«å……çŸ©å½¢
+	Pen pen(Color::Blue, 1);
+	SolidBrush brush(Color(255, 0, 0, 255));
+	FontFamily fontFamily(L"å®‹ä½“");
+	Font font(&fontFamily, 24, FontStyleRegular, UnitPixel);
+
+	for (int i = HatchStyleHorizontal; i<HatchStyleTotal; i++)
+	{
+		HatchStyle style = (HatchStyle)i;
+		//å¦‚æœä¸€è¡Œå·²ç»ç»˜åˆ¶å®Œæ¯•ï¼Œæ¢è¡Œ
+		if (rol>column_count - 1)
+		{
+			column += 2;
+			rol = 0;
+		}
+		//åˆ›å»ºä¸´æ—¶ç”»åˆ·
+		HatchBrush brush_tmp(style, black, white);
+		//å¡«å……çŸ©å½¢ï¼šè®¾ç½®å®½åº¦ä¸ºWIDTH-20çš„ç›®çš„æ˜¯è®©çŸ©å½¢ä¹‹é—´ç•™å‡ºé—´éš”
+		graphics.FillRectangle(&brush_tmp, rol*WIDTH, column*HEIGHT, WIDTH - 20, HEIGHT);
+		//ç»˜åˆ¶çŸ©å½¢è¾¹æ¡†
+		graphics.DrawRectangle(&pen, rol*WIDTH, column*HEIGHT, WIDTH - 20, HEIGHT);
+
+		//æ˜¾ç¤ºæ¯ç§ç”»åˆ·é£æ ¼çš„æšä¸¾åç§°
+		//è®¡ç®—æ–‡æœ¬è¾“å‡ºåŒºåŸŸ
+		RectF layoutRect(rol*WIDTH, (column + 1)*HEIGHT, WIDTH, HEIGHT);
+		StringFormat format;
+		//è®¾ç½®æ–‡æœ¬è¾“å‡ºæ ¼å¼ï¼šæ°´å¹³ã€å‚ç›´å±…ä¸­
+		format.SetAlignment(StringAlignmentNear);
+		format.SetLineAlignment(StringAlignmentCenter);
+		//åœ¨çŸ©å½¢æ¡†ä¸­å¤®è¾“å‡ºæšä¸¾å€¼
+	/*	CString s; s.Format(_T("%d"), style);
+		MyDrawString(graphics, s, myFont, redBrush, layoutRect, format);*/
+		wostringstream oss;
+		oss << (int)style;
+		wstring str = oss.str();
+
+		graphics.DrawString(str.c_str(), -1, &font, PointF(layoutRect.X, layoutRect.Y), &brush);
+		rol += 1;
+	}
+#endif
+#if 0// 3-12 è®¾ç½®ç”»åˆ·åŸç‚¹
+	Graphics graphics(hdc);
+
+	//è®¾å®šç”»åˆ·çš„å‰æ™¯è‰²ä¸ºé»‘è‰²ï¼ŒèƒŒæ™¯è‰²ä¸ºç™½è‰²
+	Color black = Color::Black;
+	Color white = Color::White;
+	HatchBrush hatchBrush(HatchStyleDarkDownwardDiagonal, black, white);
+
+	//åœ¨ç«–ç›´æ–¹å‘å¡«å……8ä¸ªçŸ©å½¢ï¼Œä½¿ç”¨é»˜è®¤çš„ç”»åˆ·åŸç‚¹
+	for (int i = 0; i<8; i++)
+	{
+		graphics.FillRectangle(&hatchBrush, 0, i * 50, 100, 50);
+	}
+
+	//ä½¿ç”¨ä¸åŒçš„ç»˜åˆ¶åŸç‚¹è¿›è¡ŒåŒºåŸŸå¡«å……
+	for (int i = 0; i<8; i++)
+	{
+		//è®¾ç½®ç”»åˆ·åŸç‚¹(æ°´å¹³æ–¹å‘é€’å¢)
+		graphics.SetRenderingOrigin(i, 0);
+		graphics.FillRectangle(&hatchBrush, 100, i * 50, 100, 50);
+	}
+#endif
+#if 1 // 3-13 çº¹ç†ç”»åˆ·
+	Graphics graphics(hdc);
+	Pen pen(Color::Blue, 2);
+	SolidBrush brush(Color::Black);
+	Font myFont(L"å®‹ä½“", 12);
+
+	//å®šä¹‰çº¹ç†ç”»åˆ·çš„ä¸åŒå¡«å……åŒºåŸŸ
+	RectF rect1(10, 10, 200, 200);
+	RectF rect2(210, 10, 200, 200);
+	RectF rect3(410, 10, 200, 200);
+
+	//è£…å…¥çº¹ç†å›¾ç‰‡
+	Bitmap image(L"nemo.bmp");
+	//æ„é€ çº¹ç†ç”»åˆ·1ï¼šä½¿ç”¨é»˜è®¤çš„æ–¹å¼
+	TextureBrush tBrush(&image);
+	//ä½¿ç”¨çº¹ç†ç”»åˆ·å¡«å……åœ†å½¢åŒºåŸŸ
+	graphics.FillEllipse(&tBrush, rect1);
+	//ç»˜åˆ¶åœ†å‘¨
+	graphics.DrawEllipse(&pen, rect1);
+	//MyDrawString(graphics, "å›¾ç‰‡åŸå§‹å¤§å°", myFont, brush, PointF(40, 220));
+
+	//æ„é€ çº¹ç†ç”»åˆ·2ï¼šåªä½¿ç”¨ç»™å®šå›¾ç‰‡çš„éƒ¨åˆ†åŒºåŸŸ
+	TextureBrush tBrush2(&image, Rect(55, 35, 55, 35));
+	graphics.FillEllipse(&tBrush2, rect2);
+	graphics.DrawEllipse(&pen, rect2);
+	//MyDrawString(graphics, "ä½¿ç”¨éƒ¨åˆ†æˆªå›¾", myFont, brush, PointF(240, 220));
+
+	//æ„é€ çº¹ç†ç”»åˆ·3ï¼šå°†ä½¿ç”¨å›¾ç‰‡çš„ç”»åˆ·è¿›è¡Œç¼©æ”¾
+	TextureBrush tBrush3(&image);
+	//å¯¹ç”»åˆ·è¿›è¡Œ50%çš„ç¼©æ”¾
+	Matrix mtr(0.5f, 0.0f, 0.0f, 0.5f, 0.0f, 0.0f);
+	tBrush3.SetTransform(&mtr);
+	graphics.FillEllipse(&tBrush3, rect3);
+	graphics.DrawEllipse(&pen, rect3);
+	//MyDrawString(graphics, "æ¯”ä¾‹ç¼©å°å›¾ç‰‡", myFont, brush, PointF(440, 220));
+	//wstring str;
+	//str.append(L"aa");
+	//graphics.DrawString(str.c_str(), -1, &myFont, PointF(440., 220.), &brush);
+	//PrintString(hdc, str, brush,440., 220.);
 #endif
 }
 
