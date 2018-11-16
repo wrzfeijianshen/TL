@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DuiDesigner", "DuiDesigner\DuiDesigner.vcxproj", "{8CC28A8B-CD88-44A7-8994-066CCD8938CB}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -30,6 +30,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "07_xml_简单控件", "demo\07_xml_简单控件\07_xml_简单控件.vcxproj", "{61922732-AA77-4C78-8135-7A7583B85AE1}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "08_xml_复杂控件", "demo\08_xml_复杂控件\08_xml_复杂控件.vcxproj", "{A5609A7A-846A-4E86-A307-32628A2A8AE3}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "09_自绘控件", "demo\09_自绘控件\09_自绘控件.vcxproj", "{C5305332-B7E1-4FE2-92E9-F5B4748FB73B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -119,6 +121,14 @@ Global
 		{A5609A7A-846A-4E86-A307-32628A2A8AE3}.UnicodeDebug|Win32.Build.0 = Debug|Win32
 		{A5609A7A-846A-4E86-A307-32628A2A8AE3}.UnicodeRelease|Win32.ActiveCfg = Release|Win32
 		{A5609A7A-846A-4E86-A307-32628A2A8AE3}.UnicodeRelease|Win32.Build.0 = Release|Win32
+		{C5305332-B7E1-4FE2-92E9-F5B4748FB73B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{C5305332-B7E1-4FE2-92E9-F5B4748FB73B}.Debug|Win32.Build.0 = Debug|Win32
+		{C5305332-B7E1-4FE2-92E9-F5B4748FB73B}.Release|Win32.ActiveCfg = Release|Win32
+		{C5305332-B7E1-4FE2-92E9-F5B4748FB73B}.Release|Win32.Build.0 = Release|Win32
+		{C5305332-B7E1-4FE2-92E9-F5B4748FB73B}.UnicodeDebug|Win32.ActiveCfg = Debug|Win32
+		{C5305332-B7E1-4FE2-92E9-F5B4748FB73B}.UnicodeDebug|Win32.Build.0 = Debug|Win32
+		{C5305332-B7E1-4FE2-92E9-F5B4748FB73B}.UnicodeRelease|Win32.ActiveCfg = Release|Win32
+		{C5305332-B7E1-4FE2-92E9-F5B4748FB73B}.UnicodeRelease|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -132,5 +142,6 @@ Global
 		{631203A4-FABE-424E-8867-CB494C2EDB73} = {E2D1E82A-A2FE-471C-84EC-9019F50C9540}
 		{61922732-AA77-4C78-8135-7A7583B85AE1} = {E2D1E82A-A2FE-471C-84EC-9019F50C9540}
 		{A5609A7A-846A-4E86-A307-32628A2A8AE3} = {E2D1E82A-A2FE-471C-84EC-9019F50C9540}
+		{C5305332-B7E1-4FE2-92E9-F5B4748FB73B} = {E2D1E82A-A2FE-471C-84EC-9019F50C9540}
 	EndGlobalSection
 EndGlobal
