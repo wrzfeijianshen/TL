@@ -1,3 +1,6 @@
 [submodule "c++/duilib/DuiLib_Ultimate"]
 	path = c++/duilib/DuiLib_Ultimate
 	url = https://github.com/qdtroy/DuiLib_Ultimate.git
+[submodule "c++/duilib/juhuaguai_duilib"]
+	path = c++/duilib/juhuaguai_duilib
+	url = https://github.com/juhuaguai/duilib.git
