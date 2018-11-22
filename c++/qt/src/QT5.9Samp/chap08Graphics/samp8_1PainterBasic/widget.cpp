@@ -494,7 +494,7 @@ void Widget::paintEvent(QPaintEvent *event)
 //   myDrawGradient();
 
 //4. 绘制基本图形
-   myDrawShape();
+//   myDrawShape();
 
 //    QPainter    painter(this);//创建QPainter对象
 //    painter.setRenderHint(QPainter::Antialiasing);//
